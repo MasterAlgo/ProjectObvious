@@ -1,0 +1,15 @@
+body{margin:0;background:#000;color:#e6e6e6;font:14px/1.4 system-ui,Segoe UI,Arial,sans-serif;display:flex;flex-direction:column;align-items:center}
+  #wrap{width:100%;max-width:1012px}
+  canvas{width:100%;height:auto;display:block;touch-action:manipulation;cursor:pointer}
+  .row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:6px 10px}
+  button{background:#1b2a33;color:#cfe8f3;border:1px solid #3a5565;border-radius:6px;padding:6px 12px;font:inherit;cursor:pointer}
+  button:hover{background:#27404d}
+  #info{display:grid;grid-template-columns:auto 1fr auto;gap:4px 10px;align-items:center;max-width:620px;margin:6px auto;padding:0 12px;width:100%;box-sizing:border-box}
+  .bar{height:10px;background:#12181c;border-radius:5px;overflow:hidden}
+  .bar i{display:block;height:100%;background:#8ac;transition:width .3s}
+  .win .bar i{background:#ff9f94}
+  .win{color:#ffb3aa;font-weight:600}
+  label{color:#cfe8f3;display:flex;align-items:center;gap:6px}
+  #msg{text-align:center;min-height:1.4em;color:#ffb3aa;padding:2px 12px}
+  #tally{text-align:center;color:#9ab;font-size:13px;padding:2px 12px}
+  small{color:#8fa0a8;display:block;text-align:center;padding:2px 12px 14px}
