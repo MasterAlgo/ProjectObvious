@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OBVIOUS — Clue 9: Inference Arrival Timing</title>
+<link rel="stylesheet" href="../assets/css/labs.css">
+<link rel="stylesheet" href="../assets/css/c9-activation.css">
+  <meta name="description" content="An Obvious computational lab. Interactive toy models and clearly labeled architectural demonstrations.">
+</head>
+<body>
+<nav class="lab-return" aria-label="Lab navigation"><a href="../index.html">OBVIOUS</a><a href="../clues.html#c9-activations">&larr; Back to Clue 9</a><a href="../implications.html">Part 3 &rarr;</a></nav>
+<div id="wrap">
+  <canvas id="c"></canvas>
+  <div class="row">
+    <button id="bAll">All inputs on</button>
+    <button id="bClr">Clear</button>
+    <button id="bRnd">Random inputs</button>
+    <button id="bRew">Rewire network</button>
+    <button id="bRep">Replay</button>
+  </div>
+  <div class="row">
+    <label>Node dropout <input type="range" id="noise" min="0" max="60" value="30"> <span id="nv">30%</span></label>
+    <label><input type="checkbox" id="auto" checked> Auto-repeat</label>
+  </div>
+  <div id="msg"></div>
+  <div id="info"></div>
+  <div id="tally"></div>
+  <small>Click the green input nodes to switch them on/off. Shallow layers activate first. Deeper layers have shorter configured conduction delays; the first arriving active signal wins. Depth is a proxy for specificity in this toy model, not a measured biological property.</small>
+</div>
+
+
+<script src="../assets/js/c9-activation.js"></script>
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

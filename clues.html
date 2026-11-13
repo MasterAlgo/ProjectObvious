@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OBVIOUS — Part 2: Recourse from the Curse &amp; The Clues</title>
+  <link rel="stylesheet" href="assets/css/clues.css">
+<link rel="stylesheet" href="assets/css/common.css">
+  <meta name="description" content="Five principles and ten clues: runnable labs, historical demonstrations, and architecture animations.">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand"><span>OBVIOUS</span> // ARCHITECTURE LAB</a>
+      <div class="nav-links">
+        <a href="index.html">1. Dead End</a>
+        <a href="clues.html" class="active" aria-current="page">2. The Clues &amp; Lab</a>
+        <a href="implications.html">3. What Might This Explain?</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" id="main-content">
+    <header>
+      <div class="eyebrow">Part 2 of 3 — Escaping the Combinatorial Trap</div>
+      <h1>RECOURSE FROM THE CURSE</h1>
+      <p class="subtitle">
+        <strong>Fighting combinatorics with combinatorics:</strong> five principles and ten clues, with runnable browser labs, historical experiment recordings, and architecture animations.
+      </p>
+    </header>
+
+    <!-- Practitioner Note & Status Legend -->
+    <div class="practitioner-bar">
+      <div>
+        <strong>Practitioner's Lab Notebook:</strong> Principles 1–5 introduce the ideas. Clues 1–10 provide runnable labs, historical recordings, and architecture demonstrations. Observation, Demonstration, Design Choice, and Conjecture describe the status of a statement; they are separate from its clue number and presentation format. Biological interpretations and proposed extensions are labeled separately.
+      </div>
+      <div class="badge-legend">
+        <span class="tag tag-obs">Observation</span>
+        <span class="tag tag-demo">Demonstration</span>
+        <span class="tag tag-design">Design Choice</span>
+        <span class="tag tag-conj">Conjecture</span>
+      </div>
+    </div>
+
+    <nav class="experiment-index" aria-label="Experiments and demonstrations"><a href="#c1-spatial" class="tag tag-demo">Clue 1 · Spatial selectivity · Runnable</a>
+<a href="#c2-temporal" class="tag tag-demo">Clue 2 · Sequence prediction · Runnable</a>
+<a href="#c3-sinusoids" class="tag tag-demo">Clue 3 · Population similarity · Runnable</a>
+<a href="#c4-clustering" class="tag tag-obs">Clue 4 · Novel clustering · Recorded</a>
+<a href="#c5-learning" class="tag tag-demo">Clue 5 · Local learning · Recorded</a>
+<a href="#c6-generation" class="tag tag-demo">Clue 6 · Generation · Recorded</a>
+<a href="#c7-channels" class="tag tag-demo">Clue 7 · Channel hierarchies · Recorded</a>
+<a href="#c8-presentations" class="tag tag-design">Clue 8 · Storage architecture · Schematic</a>
+<a href="#c9-activations" class="tag tag-demo">Clue 9 · Inference timing · Runnable</a>
+<a href="#clue-10" class="tag tag-demo">Clue 10 · Context-guided generation · Runnable</a></nav>
+    <!-- Core Premise Box -->
+    <section class="escape-hero">
+      <div>
+        <h2>The Escape in One Idea: Store Parts, Not Wholes</h2>
+        <p>
+          <strong>Dead End</strong> showed that choosing 200 active synapses out of 10,000 yields <strong>1.71 &times; 10<sup>424</sup></strong> combinations. Enumerating that space is a dead end. Yet biological neurons operate continuously without enumerating it.
+        </p>
+        <p style="margin-bottom:0;">
+          The same property that makes the space huge also makes composition powerful. Twenty-six letters in 12 positions allow ~10<sup>17</sup> strings, yet nobody stores them. We store reusable parts (letters, fragments, words) and combine them on demand. The strategy is not to represent every combination—it is to <strong>discover, retain, combine, and reuse the patterns that actually matter</strong>.
+        </p>
+      </div>
+      <div class="math-compare">
+        <div>Exhaustive wholes: <span class="hl">m<sup>k</sup></span> (explodes)</div>
+        <div>Primitive inventory: <span class="good">O(m)</span> for m symbols</div>
+        <div style="margin-bottom:0; color:var(--muted); font-size:0.78rem;">
+          Learned patterns, attributes, associations, and retrieval indexes add storage and maintenance costs beyond this primitive inventory. Their practical scaling must be measured.
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- PRINCIPLE 1 + CLUE 4: STRUCTURED EXPERIENCE & POPULATION CLUSTERING         -->
+    <!-- ================================================================== -->
+    <section class="clue-section" id="clue-1">
+      <div class="clue-header">
+        <div>
+          <div class="clue-num">Principle 1 // Sparsity in the Wild</div>
+          <h2 class="clue-title">The possible space is astronomical. The experienced space is structured.</h2>
+        </div>
+        <span class="tag tag-obs">Observation</span><span class="tag tag-conj">Interpretation Hypothesis</span>
+      </div>
+
+      <div class="grid-2">
+        <!-- Principle 1 Card -->
+        <div class="card">
+          <div>
+            <div class="card-top">
+              <span class="exp-id">Principle 1 // N-GRAM OCCUPANCY</span>
+              <span class="tag tag-obs">Observation</span>
+            </div>
+            <h3>Natural Text Occupies a Tiny Sliver of Possible Combinations</h3>
+            <p>
+              Take sequences of 10–12 characters from a finite alphabet. While theoretical possibilities grow exponentially (<code>alphabet<sup>n</sup></code>), natural English text is bound by recurring fragments, dependencies, and constraints.
+            </p>
+            <p>
+              Recurring structure can reduce the number of distinct encountered windows. The size of that reduction depends on the corpus, alphabet, preprocessing, window length, and comparison baseline; no fixed reduction factor is established here.
+            </p>
+          </div>
+          <details>
+            <summary>[+ Check It Yourself / Reproduction Procedure]</summary>
+            <p>
+              Choose and record a corpus, alphabet, case/whitespace rules, and window lengths (for example, <code>n = 4..12</code>). Count unique windows in the original text and equally long shuffled controls preserving character frequencies. Repeat the shuffling and compare unique counts at matched corpus sizes. Both natural and random finite corpora occupy a shrinking fraction of <code>alphabet<sup>n</sup></code>; that fact alone does not establish useful compression. Test whether retained structure also improves prediction or retrieval.
+            </p>
+          </details>
+        </div>
+
+        <!-- Clue 4 Card with MP4 Video Slot -->
+        <div class="card">
+          <div>
+            <div class="card-top">
+              <span class="exp-id" id="c4-clustering">Clue 4 // FIFTEEN NOVELS</span>
+              <span class="tag tag-obs">Observation</span>
+            </div>
+            <h3>Fifteen Novels: Many-to-Many Population Clustering</h3>
+            <p>
+              If character-pattern populations are learned independently from 15 different novels, do their higher-level relationships emerge simply by comparing the populations against one another—without requiring exact matches between individual patterns?
+            </p>
+            <div class="media-stage">
+              <video preload="metadata" src="media/c4-fifteen-novels.mp4" controls loop muted playsinline style="width:100%; border-radius:6px; display:block; margin-bottom:0.6rem;"></video>
+              <span class="slot-label">Screen Capture: Many-to-many similarity matrix and hierarchical clustering across 15 literary corpora</span>
+              <div class="btn-row">
+                <a href="media/c4-fifteen-novels.mp4" target="_blank" class="btn" rel="noopener noreferrer">Open Video</a>
+              </div>
+            </div>
+          </div>
+          <details>
+            <summary>[+ Experiment Setup &amp; Clue]</summary>
+            <p>
+              <strong>Setup:</strong> Learn an independent population of character combinations from each of 15 novels, then compute pairwise population similarity across all 15.<br/>
+              <strong>Clue:</strong> Population-level similarity reveals structural relationships (clustering by author/style) without needing identical token sequences.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- CLUES 2 & 3 + JAVA-STYLE LIF COINCIDENCE LAB & METAPHORS           -->
+    <!-- ================================================================== -->
+    <section class="clue-section">
+      <div class="clue-header">
+        <div>
+          <div class="clue-num" id="clues-2-3">Principles 2 &amp; 3 // Integration, Windows &amp; Equivalence Classes</div>
+          <h2 class="clue-title">Integration turns diverse, graded inputs into protocol-agnostic response spikes.</h2>
+        </div>
+        <span class="tag tag-demo">Interactive Demonstration</span>
+      </div>
+
+      <!-- THE TWO-PART DRY HUMOR METAPHOR DUO -->
+      <div class="metaphor-duo">
+        <div class="metaphor-duo-header">
+          <h3>A Two-Part Reality Check: Wedding Envelopes &amp; Sneakers in the Dark</h3>
+          <span class="tag tag-design">Intuition Pump</span>
+        </div>
+        <div class="grid-2">
+          <div class="metaphor-card">
+            <h4>1. The Wedding Gift Problem (Integration &amp; Graded Contributors)</h4>
+            <p>
+              Relatives hand you envelopes with $50, $500, or $5,000 inside. The individual graded amounts and sources matter while the pile is accumulating. Once the total crosses your threshold, the output event is simply: <em>"We can buy the house!"</em>
+            </p>
+            <p class="metaphor-punchline">
+              A response spike can correspond to many different combinations of graded inputs. In this computational analogy it identifies a response class; the event alone does not specify the contributing combination.
+            </p>
+          </div>
+          <div class="metaphor-card">
+            <h4>2. Comparing Sneakers by Touch (Resolving Ambiguity)</h4>
+            <p>
+              If every detector throws away input details at threshold, how do we tell two similar things apart? Reach into a dark closet and grab a sneaker. One fingertip feels a seam; a second feels a sole curve; a third feels mesh. Alone, each fingertip is ambiguous.
+            </p>
+            <p class="metaphor-punchline">
+              Yet the whole hand knows immediately. Ambiguity at the single-detector level dissolves when overlapping populations vote together.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- JAVA SWING INSPIRED INTERACTIVE LIF LAB CARD -->
+      <div class="card" style="border-color: var(--accent);">
+        <div>
+          <div class="card-top">
+            <span class="exp-id">WEIGHTED-INPUT DEMONSTRATION // AMPLITUDE-BAND DETECTION</span>
+            <span class="tag tag-demo">Interactive Simulation</span>
+          </div>
+          <h3>Weighted Contributions &amp; an Inclusive Threshold Band</h3>
+          <p>
+            This toy detector sums the current weighted contributions and emits an event when the sum lies within an inclusive amplitude band: lower &le; &Sigma; &le; upper. It has no leaky membrane state or temporal integration window. Contributor names in the diagnostic log are available to the viewer, not encoded in the output event.
+          </p>
+
+          <!-- Interactive Canvas Container mimicking your Java GUI -->
+          <div style="background: var(--code-bg); border: 1px solid var(--panel-border); border-radius: 8px; padding: 1rem; margin: 1rem 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem;">
+                <label style="color: var(--muted);">Signal Generator:</label>
+                <select id="sigGenSelect" style="background: var(--panel); color: var(--text); border: 1px solid var(--panel-border); padding: 0.25rem 0.5rem; border-radius: 4px; font-family: monospace;">
+                  <option value="random">random</option>
+                  <option value="sine">sine</option>
+                  <option value="spikes">spikes</option>
+                </select>
+              </div>
+              <div id="somaSumDisplay" style="font-family: monospace; font-size: 0.95rem; color: var(--gold); font-weight: 700;">
+                &Sigma; = 0.00
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2.2fr 1fr; gap: 1rem; align-items: stretch;">
+              <canvas id="javaLifCanvas" width="560" height="260" style="width: 100%; height: auto; background: #06090f; border-radius: 6px; display: block;"></canvas>
+              
+              <!-- Axon Output History List Box -->
+              <div style="background: var(--panel); border: 1px solid var(--panel-border); border-radius: 6px; padding: 0.5rem; display: flex; flex-direction: column;">
+                <span style="font-family: monospace; font-size: 0.75rem; color: var(--muted); border-bottom: 1px solid var(--panel-border); padding-bottom: 0.25rem; margin-bottom: 0.35rem; font-weight: 700;">Contributor Diagnostics</span>
+                <div id="axonOutputLog" style="font-family: monospace; font-size: 0.8rem; color: var(--accent); overflow-y: auto; max-height: 220px; flex-grow: 1; display: flex; flex-direction: column; gap: 0.2rem;">
+                  <span style="color: var(--muted); font-style: italic;">Waiting for threshold-band match...</span>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" id="integrationPause">Pause demonstration</button>
+            <button type="button" id="integrationReset">Reset demonstration</button>
+            <!-- Dual Threshold Sliders -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--panel-border); font-size: 0.85rem;">
+              <div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                  <label style="color: var(--muted);">Lower Input Threshold:</label>
+                  <span id="lowerThreshVal" style="font-family: monospace; color: var(--accent); font-weight: 700;">1.50</span>
+                </div>
+                <input type="range" id="lowerThreshSlider" min="0.5" max="3.0" value="1.5" step="0.05" style="width:100%; accent-color: var(--accent);" />
+              </div>
+              <div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.25rem;">
+                  <label style="color: var(--muted);">Upper Input Threshold:</label>
+                  <span id="upperThreshVal" style="font-family: monospace; color: var(--gold); font-weight: 700;">3.00</span>
+                </div>
+                <input type="range" id="upperThreshSlider" min="2.0" max="4.5" value="3.0" step="0.05" style="width:100%; accent-color: var(--gold);" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="clue-section" id="clue-4">
+      <div class="clue-header"><div><div class="clue-num">Principle 4 // Reusable Local Constraints</div><h2 class="clue-title">Local evidence can be combined across positions and time.</h2></div><span class="tag tag-demo">Toy-Model Demonstrations</span></div>
+      <p>One local detector is ambiguous. Several configured detectors constrain more of the input, and sustained matches can combine evidence across successive observations. Clue 1 and Clue 2 make those operations inspectable; their usefulness depends on coverage, timing, and the input distribution.</p>
+    </section>
+    <!-- ================================================================== -->
+    <!-- WIRING Clue 1: SPATIAL ABRACADABRA                          -->
+    <!-- ================================================================== -->
+    <section class="clue-section">
+      <div class="clue-header">
+        <div>
+          <div class="clue-num" id="c1-spatial">Clue 1 // Spatial ABRACADABRA</div>
+          <h2 class="clue-title">Overlapping Receptive Fields &amp; Spatial Combinatorial Selectivity</h2>
+        </div>
+        <span class="tag tag-demo">Interactive Lab</span>
+      </div>
+
+      <div class="card" style="border-color: var(--accent);">
+        <div>
+          <div class="card-top">
+            <span class="exp-id">SPATIAL PATTERN DETECTOR // FALSE POSITIVE ANALYSIS</span>
+            <span class="tag tag-demo">Live Simulation</span>
+          </div>
+          <h3>How Overlapping Detectors Carve Up the Input Space</h3>
+          <p>
+            Can a few local hard-AND detectors select a target from a large input space? Explore sampled false-positive rates and the exact selectivity implied by the number of distinct positions constrained. Five symbols in eleven positions allow 48,828,125 possible states.
+          </p>
+
+          <div class="media-stage" style="border-color: var(--accent); padding: 1.5rem; text-align: center;">
+            <span class="slot-label">SPATIAL ABRACADABRA INTERACTIVE LAB</span>
+            <div class="btn-row" style="margin-top: 0.75rem;">
+              <a href="labs/c1-spatial.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.6rem 1.4rem; font-size: 0.9rem;">Open Spatial Lab &rarr;</a>
+            </div>
+          </div>
+
+          <details>
+            <summary>[+ Read Spatial Explainer &amp; Core Takeaway]</summary>
+            <p>
+              <strong>The Setup:</strong> An 11-position input (5 unique symbols, 5<sup>11</sup> = 48,828,125 states) feeds hard-AND nodes wired to target subpatterns. These detectors are configured from the target; they do not learn it.<br/>
+              <strong>The Discovery:</strong> Under uniform random input, constraining U distinct positions gives a match probability of 5<sup>&minus;U</sup>. Shared positions are not independent evidence. Compare actual coverage and effective fan-in across wiring modes. Zero errors in a short sample does not establish a zero error rate or a biological mechanism.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- WIRING Clue 2: TEMPORAL ABRACADABRA                         -->
+    <!-- ================================================================== -->
+    <section class="clue-section">
+      <div class="clue-header">
+        <div>
+          <div class="clue-num" id="c2-temporal">Clue 2 // Temporal ABRACADABRA</div>
+          <h2 class="clue-title">Early Sequence Prediction, Sustained Traces &amp; K-of-N Inference</h2>
+        </div>
+        <span class="tag tag-demo">Interactive Lab</span>
+      </div>
+
+      <div class="card" style="border-color: var(--accent);">
+        <div>
+          <div class="card-top">
+            <span class="exp-id">TEMPORAL SEQUENCE PREDICTION // WORKING MEMORY TRACES</span>
+            <span class="tag tag-demo">Live Simulation</span>
+          </div>
+          <h3>Predicting Sequences from Partial Evidence via Sustained Activity</h3>
+          <p>
+            Extending spatial detection into time, this lab introduces sliding windows, persistent activation traces (working memory), and a <strong>K-of-N inference threshold</strong> that shifts the network from conservative recognition (K = N) to early sequence prediction (K &lt; N).
+          </p>
+
+          <div class="media-stage" style="border-color: var(--accent); padding: 1.5rem; text-align: center;">
+            <span class="slot-label">TEMPORAL SEQUENCE PREDICTION INTERACTIVE LAB</span>
+            <div class="btn-row" style="margin-top: 0.75rem;">
+              <a href="labs/c2-temporal.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.6rem 1.4rem; font-size: 0.9rem;">Open Temporal Lab &rarr;</a>
+            </div>
+          </div>
+
+          <details>
+            <summary>[+ Read Temporal Explainer &amp; Core Takeaway]</summary>
+            <p>
+              <strong>The Mechanism:</strong> Latent subpattern detectors sustain activation for a separately adjustable number of strides. The detector count N and sustain duration are different parameters.<br/>
+              <strong>Early prediction:</strong> With K &lt; N, sufficient retained matches may trigger an event before the full target arrives. Earlier commitment trades evidence for speed; measure false positives as K, sustain, coverage, and input distribution change.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- PRINCIPLE 5 + CLUE 3: POPULATIONS OF PATTERNS & THE LIVE sin() LAB          -->
+    <!-- ================================================================== -->
+    <section class="clue-section">
+      <div class="clue-header">
+        <div>
+          <div class="clue-num" id="clue-5">Principle 5 // The Central Experiment</div>
+          <h2 class="clue-title">The computational object is the interacting population of patterns.</h2>
+        </div>
+        <span class="tag tag-demo">Live Browser Lab</span>
+      </div>
+
+      <div class="grid-2">
+        <!-- Principle 5 Pattern Graph Architecture -->
+        <div class="card">
+          <div>
+            <div class="card-top">
+              <span class="exp-id">Principle 5 // THE PATTERN SUBSTRATE</span>
+              <span class="tag tag-conj">Architectural Conjecture</span>
+            </div>
+            <h3>Decoupling Pattern Identity from Neuron Identity</h3>
+            <p>
+              In biological tissue, one neuron participates in many patterns, and one pattern spans many neurons. In software, we separate the two: retained combinations are represented explicitly as an <strong>attributed directed graph</strong> (hierarchical dictionaries).
+            </p>
+            <p>
+              Each pattern carries a symbolic key, constituent subpatterns, weights/thresholds, frequency, age, and temporal links. It is <em>symbolic</em> at the level of pattern identity, while inference remains massively distributed across populations.
+            </p>
+          </div>
+          <details>
+            <summary>[+ Why This Sidesteps the Symbolic vs. Subsymbolic War]</summary>
+            <p>
+              Patterns do not need human-readable labels to have explicit computational keys. Because each retained combination has an addressable identity, populations can be compared, merged, pruned, or queried bidirectionally without a separate symbolic reasoning engine bolted on top.
+            </p>
+          </details>
+        </div>
+
+        <!-- Clue 3 Live sin() Lab Launcher -->
+        <div class="card" style="border-color: var(--accent);">
+          <div>
+            <div class="card-top">
+              <span class="exp-id" id="c3-sinusoids">Clue 3 // THE LIVE sin() LAB</span>
+              <span class="tag tag-demo">Runnable Browser Experiment</span>
+            </div>
+            <h3>Noisy Sinusoids: Discovering Similarity Across Populations</h3>
+            <p>
+              Uses adjustable 3–12-position windows of quantized sinusoids, with vertical sample jitter and missing readings. Encountered combinatorial patterns accumulate into populations and are compared via high-dimensional similarity measures:
+            </p>
+            <ul style="padding-left:1.2rem; color:#cbd5e1; font-size:0.88rem; margin-bottom:0.8rem;">
+              <li>One or more accumulated TEST windows against one or many trained populations</li>
+              <li>An accumulated TEST population against each trained population</li>
+            </ul>
+            <div class="media-stage" style="border-color: var(--accent);">
+              <span class="slot-label">LIVE EXPERIMENT: vary vertical jitter and missing readings; compare how the similarity measures respond</span>
+              <div class="btn-row">
+                <a href="labs/c3-sinusoids.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open Live sin() Lab &nearr;</a>
+                <a href="media/3-sin-fallback-2.png" target="_blank" class="btn" rel="noopener noreferrer">Historical Lab Screenshot &nearr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- PART C (Clue 5, Clue 6, Clue 7): LEARNING, BIDIRECTIONAL GENERATION, MULTIMODAL -->
+    <!-- ================================================================== -->
+    <section class="clue-section">
+      <div class="clue-header">
+        <div>
+          <div class="clue-num">Clues 5–7 // Beyond Static Matching</div>
+          <h2 class="clue-title">Continual local learning, bidirectional recall, and multimodal hierarchies.</h2>
+        </div>
+        <span class="tag tag-demo">Demonstrations + Conjectures</span>
+      </div>
+
+      <!-- Clue 5 Full-width Card -->
+      <div class="card" style="margin-bottom: 1.5rem;">
+        <div class="card-top">
+          <span class="exp-id" id="c5-learning">Clue 5 // CONTINUAL LEARNING WITHOUT BACKPROPAGATION</span>
+          <span class="tag tag-demo">Recorded Demonstration</span><span class="tag tag-conj">Proposed Extensions</span>
+        </div>
+        <h3>Incremental Local Updates, Forgetting &amp; Sleep-Like Reorganization (IMDb, Amazon, MNIST)</h3>
+        <p>
+          Can the same pattern substrate learn incrementally from single encounters using local attribute updates—combining unsupervised (UL), supervised (SL), and reinforcement (RL) signals—while managing capacity via deliberate weakening and sleep-like pruning?
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>Mechanisms Exercised in Code</th>
+              <th>Proposed / Conjectured Extensions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>IMDb Reviews</strong></td>
+              <td>Incremental pattern acquisition, local frequency/salience updates, sentiment association</td>
+              <td>Multi-pass offline consolidation &amp; autonomous hierarchy restructuring</td>
+            </tr>
+            <tr>
+              <td><strong>Amazon Reviews</strong></td>
+              <td>Streaming text parsing &amp; capacity control (historical generation; universal parsing mechanics)</td>
+              <td>Cross-domain transfer against frozen specialist populations</td>
+            </tr>
+            <tr>
+              <td><strong>MNIST Digits</strong></td>
+              <td>Spatial feature extraction, local supervised/reinforcement attribute weighting, saccadic traversal</td>
+              <td>Full closed-loop UL + SL + RL co-adaptation on one substrate</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Media Stage for IMDb & MNIST Assets -->
+        <div class="grid-2" style="margin-top: 1rem;">
+          <div class="media-stage" style="margin: 0;">
+            <a href="https://youtu.be/7YRrUUr33Ds" target="_blank" rel="noopener noreferrer" class="recording-preview" aria-label="Watch the historical IMDb experiment on YouTube (opens a new tab)"><img src="media/imdb.png" alt="Historical IMDb learning experiment" loading="lazy"></a>
+            <span class="slot-label">Historical IMDb experiment · recording on YouTube</span>
+            <div class="btn-row">
+              <a href="https://youtu.be/7YRrUUr33Ds" target="_blank" class="btn btn-primary" rel="noopener noreferrer">Watch on YouTube &nearr;</a>
+              <a href="media/imdb.png" target="_blank" class="btn" rel="noopener noreferrer">View IMDb Capture</a>
+            </div>
+          </div>
+          <div class="media-stage" style="margin: 0;">
+            <img src="media/eye-saccades.png" alt="Eye saccades" style="width:100%; border-radius:6px; display:block; margin-bottom:0.5rem;" />
+            <span class="slot-label">MNIST: <code>eye-saccades.png</code> &amp; <code>cortical-layers.png</code></span>
+            <div class="btn-row">
+              <a href="media/cortical-layers.png" target="_blank" class="btn" rel="noopener noreferrer">View Cortical Layers Figure</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <!-- Clue 6 Card -->
+        <div class="card">
+          <div>
+            <div class="card-top">
+              <span class="exp-id" id="c6-generation">Clue 6 // ASSOCIATIVE GENERATION</span>
+              <span class="tag tag-demo">Demonstration</span>
+            </div>
+            <h3>One Substrate for Recognition, Recall &amp; Completion</h3>
+            <p>
+              Because patterns and contexts are linked in an associative graph, inference works in multiple directions on the exact same substrate:
+            </p>
+            <ul style="padding-left:1.2rem; color:#cbd5e1; font-size:0.86rem; margin-bottom:0.8rem;">
+              <li>Predict next token from preceding context (<code>A B &rarr; ?</code>)</li>
+              <li>Recover preceding token from following context (<code>? B C</code>)</li>
+              <li>Fill a missing middle token from surrounding context (<code>A ? C</code>)</li>
+              <li>Compare frequency-driven vs. context-driven candidate selection</li>
+            </ul>
+            <div class="media-stage" style="margin: 0;">
+              <a href="https://youtu.be/soWw5_hYVDc" target="_blank" rel="noopener noreferrer" class="recording-preview" aria-label="Watch historical three-way generation while learning on YouTube (opens a new tab)"><img src="media/generation.png" alt="Historical associative text generation experiment" loading="lazy"></a>
+              <span class="slot-label">Three-way generation while learning · recording on YouTube</span>
+              <div class="btn-row">
+                <a href="media/generation.png" target="_blank" class="btn" rel="noopener noreferrer">View Generation Capture</a>
+                <a href="https://youtu.be/soWw5_hYVDc" target="_blank" class="btn btn-primary" rel="noopener noreferrer">Watch on YouTube &nearr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Clue 7 Card (INTEGRATED WITH stocks.png, stocks.mp4, AND cortical-layers.png) -->
+        <div class="card">
+          <div>
+            <div class="card-top">
+              <span class="exp-id" id="c7-channels">Clue 7 // HETEROGENEOUS CHANNEL HIERARCHIES</span>
+              <span class="tag tag-demo">Recorded Demonstrations</span><span class="tag tag-neutral">Unfinished Experiments</span>
+            </div>
+            <h3>Multimodal Pattern Inputs (Stox &amp; MNIST)</h3>
+            <p>
+              The MNIST experiments combine pixel patterns with gaze movement: visual observations and the displacement of the sensor. Stox combines market channels such as open price and volume; OHLCV means open, high, low, close, and volume. The pattern store natively accepts, combines, prunes, and infers over encoded multimodal inputs. These experimental applications remain unfinished.
+            </p>
+            <p>The shared <strong>intelligence contract</strong> is input matrix &rarr; brain / processor &rarr; output matrix for effectors. PopMan manages the pattern populations within that processing loop.</p>
+
+            <!-- Dual-Channel Clue 7 Media Showcase -->
+            <div class="c7-media-stack">
+              
+              <!-- Channel A: OHLCV Stocks (stocks.mp4 + stocks.png) -->
+              <div class="c7-channel-box">
+                <div class="c7-channel-header">
+                  <span class="c7-channel-tag">CHANNEL A // TEMPORAL</span>
+                  <span class="c7-channel-title">OHLCV Stock-Series Application</span>
+                </div>
+                <div class="c7-viewport">
+                  <video 
+                    controls 
+                    loop 
+                    muted 
+                    playsinline 
+                    preload="metadata" 
+                    poster="media/stocks.png">
+                    <source src="media/stocks.mp4" type="video/mp4" />
+                    <img src="media/stocks.png" alt="Historical accumulated trading-profit comparison" />
+                  </video>
+                </div>
+                <div class="c7-channel-footer">
+                  <span>Assets: <code>stocks.mp4</code> &amp; <code>stocks.png</code></span>
+                  <div class="btn-row">
+                    <button type="button" class="btn" data-stock-zoom onclick="openLightbox('media/stocks.png', 'Historical Trading Profit Comparison')">Enlarge stock screenshot</button>
+                    <a href="media/stocks.mp4" target="_blank" class="btn" rel="noopener noreferrer">Open MP4</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Channel B: MNIST Cortical Hierarchy (cortical-layers.png) -->
+              <div class="c7-channel-box">
+                <div class="c7-channel-header">
+                  <span class="c7-channel-tag">CHANNEL B // SPATIAL</span>
+                  <span class="c7-channel-title">MNIST Cortical Layer Hierarchy</span>
+                </div>
+                <div class="c7-viewport">
+                  <img src="media/cortical-layers.png" alt="Historical MNIST digit and layer-activation display" loading="lazy">
+                </div>
+                <div class="c7-channel-footer">
+                  <span>Historical MNIST digit and layer-activation display</span>
+                  <div class="btn-row">
+                    <a href="media/cortical-layers.png" target="_blank" class="btn" rel="noopener noreferrer">New Tab</a>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- PART C (Clue 8 & Clue 9): SCALING TO BILLIONS & STAGED INFERENCE WAVES     -->
+    <!-- ================================================================== -->
+    <section class="clue-section">
+      <div class="clue-header">
+        <div>
+          <div class="clue-num">Clues 8 &amp; 9 // Engineering &amp; Inference Dynamics</div>
+          <h2 class="clue-title">Pattern storage and retrieval, and a specificity-priority timing model.</h2>
+        </div>
+        <span class="tag tag-demo">Engineering + Dynamics</span>
+      </div>
+
+      <!-- ONE Clue 8 block: both presentations, two tabs, shared explanation. -->
+      <div class="c8-showcase" id="c8-presentations" aria-labelledby="c8-showcase-title">
+        <div class="card-top">
+          <span class="exp-id">Clue 8 // OUT-OF-CORE ARCHITECTURE DEMONSTRATION</span>
+          <span class="tag tag-demo">Schematic Animation</span><span class="tag tag-design">Architecture Design</span>
+        </div>
+        <h3 id="c8-showcase-title">Learn in RAM &rarr; Merge with Disk &rarr; Retrieve by Context</h3>
+        <p>
+          A large symbolic pattern repository need not be resident or active all at once.
+          Decomposed observations update keyed RAM dictionaries, which can merge into disk;
+          similarity to a prompt or memory can select overlapping, context-relevant working populations.
+          The <strong>Process View</strong> animates five concrete operations, while the
+          <strong>Architecture View</strong> explains their relationship as two connected loops.
+          Both presentations describe the same substrate.
+        </p>
+        <div class="c8-tabs" role="tablist" aria-label="Choose Clue 8 animation">
+          <button type="button" id="c8-tab-process" class="c8-tab" role="tab" aria-selected="true" aria-controls="c8-panel-process" tabindex="0">Five Beats — Process View</button>
+          <button type="button" id="c8-tab-architecture" class="c8-tab" role="tab" aria-selected="false" aria-controls="c8-panel-architecture" tabindex="-1">Two Coupled Loops — Architecture View</button>
+        </div>
+        <section class="c8-panel" id="c8-panel-process" role="tabpanel" aria-labelledby="c8-tab-process">
+          <p class="c8-view-note"><strong>Process View — operations:</strong> a mask extracts ABRACADABRA fragments; learned populations are compared; existing IDs receive updated attributes while unseen IDs are inserted. Then RAM merges into disk and overlapping context-related populations are borrowed. Shared-key counting, dictionary values, and memory amounts here are <em>schematic examples</em>, not reported experimental measurements.</p>
+          <div class="c8-frame-wrap">
+            <iframe id="c8-frame-process" class="c8-demo-frame" title="Clue 8: five operations, schematic process animation" loading="lazy" height="730" data-c8-src="labs/c8-process.html"></iframe>
+          </div>
+          <a href="labs/c8-process.html" target="_blank" rel="noopener noreferrer" class="btn">Open Process View &nearr;</a>
+        </section>
+        <section class="c8-panel" id="c8-panel-architecture" role="tabpanel" aria-labelledby="c8-tab-architecture" hidden>
+          <p class="c8-view-note"><strong>Architecture View — relationships:</strong> an incoming sample becomes a pattern population; optional inference and dictionary learning proceed locally; capacity-triggered disk merging and context-triggered soft-expert loading form <em>connected but distinct loops</em>. Use Sequence/Image, Classify/Predict and the step controls. The retrieval policy shown here is a proposed composition of related mechanisms, not a claim of benchmarked end-to-end paging performance.</p>
+          <div class="c8-frame-wrap">
+            <iframe id="c8-frame-architecture" class="c8-demo-frame" title="Clue 8: two coupled loops, schematic architecture animation" loading="lazy" height="1000" data-c8-src="labs/c8-architecture.html"></iframe>
+          </div>
+        </section>
+        <a href="labs/c8-architecture.html" target="_blank" rel="noopener noreferrer" class="btn">Open Architecture View &nearr;</a>
+        <div class="c8-afterword">
+          <strong>Common machinery:</strong> reproducible pattern identities;
+          population-to-population similarity; local update-or-insert learning;
+          RAM-to-disk merging; and potentially overlapping expert retrieval.
+          A dictionary can carry graph relationships in its attributes.
+          Compatibility between contributors requires a shared atomic encoding, pattern-key
+          scheme, and merge semantics. These are architectural explanations, not biological proofs.
+        </div>
+        <details class="c8-implications">
+          <summary>[+ Architectural implications of Clue 8]</summary>
+          <ul>
+            <li><strong>Mergeable learning:</strong> independent pattern dictionaries can be combined by shared symbolic keys and compatible attribute-update rules, rather than averaging weights.</li>
+            <li><strong>Out-of-core persistence:</strong> active RAM populations can be merged into a much larger disk repository; pruning and reorganization have their own criteria.</li>
+            <li><strong>Soft experts:</strong> context-relevant populations can overlap, without fixed expert boundaries, and can be assembled into a smaller working RAM subset.</li>
+          </ul>
+        </details>
+        <aside class="c8-afterword c8-historical-note" id="hierarchical-patterns-ps" aria-labelledby="hierarchical-patterns-title">
+          <div class="card-top">
+            <span class="exp-id">P.S. // AN EARLY HIERARCHICAL EXPERIMENT</span>
+            <span class="tag tag-demo">Historical Experiment · Author's Account</span>
+          </div>
+          <h3 id="hierarchical-patterns-title">Three layers, eighteen input positions</h3>
+          <p>An early implementation built three layers of symbolic pattern nodes. A node combined lower-level inputs into a pattern, assigned that pattern a new ID, and supplied the ID as an input to the next layer. For example, the combination <code>a, b, c</code> could become a node identified as <code>A</code>; higher layers could then combine <code>A</code> with other learned IDs.</p>
+          <p>One configuration used <strong>2, then 3, then 3 inputs</strong> per node. Its top-layer patterns could therefore span <strong>2 × 3 × 3 = 18 character positions</strong>. The higher layer reused lower-level combinations through their symbolic identities.</p>
+          <p>With an alphabet of roughly 100 characters, the potential space of complete 18-position inputs is <strong>100<sup>18</sup> = 10<sup>36</sup></strong>. The experiment retained encountered patterns and their compositions; that number describes the possible input space, not the number of stored records.</p>
+          <p><strong>The practical difficulty was maintaining the graph.</strong> When RAM filled, all three layers had to be pruned. Upper-layer patterns depended on lower-layer IDs, so removing a pattern also required managing its dependent edges. The layers could not be maintained as unrelated collections.</p>
+          <p><strong>Wildcard patterns and shared subsequences.</strong> The 18-position search allowed up to 17 wildcard positions. Eighteen positions describe the span; individual patterns could constrain fewer characters. The printout summarized fixed ends and the richest interior matches found across the source texts.</p>
+          <p>This also provided a way to <strong>heuristically mine long common subsequences across multiple texts</strong>, a direction toward multiple-sequence longest-common-subsequence (MLCS) search. It recovered useful shared structures without enumerating every match or guaranteeing a globally longest solution.</p>
+          <p><strong>The architectural lesson:</strong> patterns can become inputs to further patterns. Additional layers extend the representational depth, and additional source sequences extend the search. Memory, processing cost, and the maintenance of dependencies constrain practical scale. The early experiment demonstrated this reuse and selective discovery; the animations above illustrate related storage and retrieval operations.</p>
+        </aside>
+      </div>
+
+      <!-- Clue 9 is a separate experiment: interactive explanation + original evidence.
+           This project-owned HTML remains an external local dependency: 
+           labs/c9-activation.html. Keep media/layered-activation.png in /media. -->
+      <div class="card c9-showcase" id="c9-activations">
+        <div class="card-top">
+          <span class="exp-id">Clue 9 // STAGED INFERENCE WAVES</span>
+          <span class="tag tag-demo">Interactive Simulation</span><span class="tag tag-conj">Biological Timing Hypothesis</span>
+        </div>
+        <h3>Specific First, General as Fallback</h3>
+        <p>
+          The toy model assigns faster inference pathways to deeper layers and selects the earliest arriving active evidence. When deeper evidence is absent, a shallower layer may supply a later fallback. Depth is a configured proxy for specificity, not a measured property. The historical figure documents an earlier layered-activation visualization.
+        </p>
+        <p>
+          Biological axonal conduction differences and synaptic time courses motivate
+          the conjecture, but this animation alone does not establish the mechanism in biological tissue.
+        </p>
+        <div class="c9-pair">
+          <div class="c9-historical">
+            <div class="media-stage">
+              <span class="slot-label">HISTORICAL EXPERIMENT IMAGE: <code>media/layered-activation.png</code></span>
+              <a class="c9-title-figure" href="media/layered-activation.png" target="_blank" title="Open the historical layered-activation image" rel="noopener noreferrer">
+                <img src="media/layered-activation.png" alt="Historical layered activation experiment showing staged inference responses" loading="lazy" />
+              </a>
+              <div class="btn-row">
+                <a href="media/layered-activation.png" target="_blank" class="btn" rel="noopener noreferrer">Open Original &nearr;</a>
+              </div>
+            </div>
+          </div>
+          <div class="c9-interactive">
+            <div class="media-stage">
+              <span class="slot-label">INTERACTIVE INFERENCE DYNAMICS: <code>labs/c9-activation.html</code></span>
+              <iframe class="c9-demo-frame" title="Interactive fast and slow activation experiment" src="labs/c9-activation.html" loading="lazy"></iframe>
+              <div class="btn-row">
+                <a href="labs/c9-activation.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open Full Interactive Lab &nearr;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- CLUE 10: THE COMPLETED LOCAL TEXT LAB                              -->
+    <!-- ================================================================== -->
+    <section class="clue-section clue10-showcase" id="clue-10" aria-labelledby="clue10-title">
+      <div class="clue-header">
+        <div>
+          <div class="clue-num">Clue 10 // Context-Guided Generation</div>
+          <h2 class="clue-title" id="clue10-title">Learn once. Change the context. Inspect the next choice.</h2>
+        </div>
+        <span class="tag tag-demo">Demonstration · Runnable Lab</span>
+      </div>
+      <p class="evidence-note">This lab brings incremental acquisition (Clue 5), associative continuation (Clue 6), and population similarity (Clue 3) into one experiment. A learned <strong>World Model</strong> holds the token patterns and their frequencies. Editable contexts define specialized views of that shared experience.</p>
+      <div class="grid-2">
+        <div class="card">
+          <div>
+            <h3>From experience to a next token</h3>
+            <p><strong>Configure:</strong> choose characters per token, sequence length, and wildcard allowance. Full input windows produce exact patterns and the permitted wildcard variants. Repeated patterns accumulate occurrence counts in a three-tier store.</p>
+            <p><strong>Train:</strong> drop text files, pause or resume, and add more experience. Save the learned World Model as a ZIP; reload it later and generate without replaying the original texts.</p>
+            <p><strong>Generate:</strong> the recent token history retrieves exact continuations, falling back to shorter suffixes and finally learned token frequencies. This is a specialized next-token use of pattern populations.</p>
+            <p><strong>Steer:</strong> each considered context becomes an independent dictionary of exact 1-, 2-, and 3-token counts. Cosine similarity compares each candidate's matched prefix plus proposed token with those dictionaries. The highest mean scores remain eligible; Most, Least, Middle, or Random selects among ties.</p>
+          </div>
+          <p class="evidence-note">Context edits affect subsequent choices without retraining. They rank the retrieved candidates; the available alternatives depend on the learned texts and current history. A sole candidate leaves no alternative to rerank.</p>
+        </div>
+        <div class="card">
+          <div>
+            <h3>Try a small experiment</h3>
+            <ol class="clue10-steps">
+              <li>Choose one or more <code>.txt</code> files from authors, genres, or languages you want to explore. Start with one character per token, sequence length 10, and zero wildcards.</li>
+              <li>In <strong>Train</strong>, drop the files and start training. Open <strong>Generation</strong> when the model has learned some experience.</li>
+              <li>Enter a prompt taken from one of your training texts. Generate with the context checkboxes off and inspect the candidates and frequencies.</li>
+              <li>Paste a short passage into a context, enable <strong>Consider</strong>, and watch the Context scores. Edit or toggle it while generating; previous output remains.</li>
+              <li>To start a fresh continuation in another voice or language, enable <strong>Start from context</strong> and select its seed. This resets the continuation while preserving the World Model.</li>
+            </ol>
+            <p>The inline tags record which contexts and frequency mode applied. Contexts 1, 2, and 3 contribute red, green, and blue shading. Observe scores and candidate choices; a language or genre change depends on the alternatives available.</p>
+          </div>
+          <div class="btn-row clue10-launch">
+            <a href="labs/context-reranking-lab.html" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open Clue 10 Lab &nearr;</a>
+          </div>
+        </div>
+      </div>
+      <details>
+        <summary>What this clue demonstrates</summary>
+        <p>Implemented here: incremental token-pattern learning, bounded working storage, next-token retrieval, live context reranking, inspectable choices, and learned-model ZIP snapshots. All text processing runs locally in the browser.</p>
+        <p>The edge-device illustrations suggest possible distributed contributors; this lab runs one learner. ZIP snapshots store whole learned models. Automatic expert extraction, distributed model merging, out-of-core retrieval, and a biological account of contextual attention remain separate architectural proposals.</p>
+      </details>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- SUMMARY THREAD & FALSIFICATION CRITERIA                            -->
+    <!-- ================================================================== -->
+    <details class="archive-material"><summary>Additional historical material</summary><p>The <a href="media/myelin.mp4" target="_blank" rel="noopener noreferrer">myelin video</a> is preserved for context. The historical <a href="https://youtu.be/7YRrUUr33Ds" target="_blank" rel="noopener noreferrer">IMDb recording</a> and <a href="https://youtu.be/soWw5_hYVDc" target="_blank" rel="noopener noreferrer">three-way generation recording</a> are hosted on YouTube. These materials are separate from the runnable browser implementations.</p></details>
+    <section class="thread-box">
+      <h2>The Thread Connecting the Clues</h2>
+      <div class="thread-chain">
+        Spatial selectivity (Clue 1) &rarr; Temporal persistence (Clue 2) &rarr; Population similarity (Clue 3) &rarr; Clustering (Clue 4) &rarr; Continual adaptation (Clue 5) &rarr; Associative generation (Clue 6) &rarr; Heterogeneous channels (Clue 7) &rarr; Out-of-core architecture (Clue 8) &rarr; Timing simulation (Clue 9) &rarr; Context-guided generation (Clue 10)
+      </div>
+      <p style="margin-bottom:0; color:#cbd5e1; font-size:0.93rem;">
+        Together, these experiments ask a practical engineering question: can an attributed hierarchy of identifiable, reusable combinatorial patterns support distributed inference and symbolic manipulation in one continually adapting substrate?
+      </p>
+    </section>
+
+    <section class="falsify-box">
+      <h3>What Would Count Against This Approach (How to Falsify It)</h3>
+      <ul>
+        <li><strong>Occupancy doesn't compress (Principle 1):</strong> Natural inputs offer no reproducible advantage over matched randomized controls in useful retained structure, predictive accuracy, or storage cost.</li>
+        <li><strong>Population similarity collapses at scale (Clues 3–4):</strong> Collective similarity across overlapping patterns breaks down under realistic noise, jitter, and missing inputs as populations grow.</li>
+        <li><strong>Maintenance cost explodes (Clue 5, Clue 8):</strong> Pattern populations cannot be incrementally learned, pruned, merged, and retrieved within practical RAM and disk budgets.</li>
+      </ul>
+    </section>
+
+    <div class="next-banner">
+      <div>
+        <strong style="font-size:1.1rem; display:block;">If this substrate works, what does it actually buy us?</strong>
+        <span style="color:var(--muted); font-size:0.9rem;">Part 3 relates these demonstrations and architectural proposals to 14 AI opportunities and 26 biological and psychological explanatory targets.</span>
+      </div>
+      <a href="implications.html" class="btn btn-primary" style="padding:0.65rem 1.2rem; font-size:0.92rem;">Part 3: What Might This Explain? &rarr;</a>
+    </div>
+  </main>
+
+  <!-- Fullscreen Lightbox Overlay for Diagrams -->
+  <div id="lightboxOverlay" class="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Expanded image" aria-describedby="lightboxCaption" onclick="if (event.target === this) closeLightbox()">
+    <button id="lightboxClose" type="button" class="btn lightbox-close" onclick="closeLightbox()">Close image &times;</button>
+    <img id="lightboxImg" alt="Expanded view" />
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+  </div>
+
+  
+
+  
+
+<script src="assets/js/clues.js"></script>
+<script src="assets/js/shared.js"></script>
+</body>
+</html>

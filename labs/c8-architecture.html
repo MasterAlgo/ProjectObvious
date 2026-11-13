@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OBVIOUS — Clue 8 Pattern Lifecycle (Animated Concept)</title>
+<link rel="stylesheet" href="../assets/css/labs.css">
+<link rel="stylesheet" href="../assets/css/c8-architecture.css">
+  <meta name="description" content="An Obvious computational lab. Interactive toy models and clearly labeled architectural demonstrations.">
+</head>
+<body>
+<nav class="lab-return" aria-label="Lab navigation"><a href="../index.html">OBVIOUS</a><a href="../clues.html#c8-presentations">&larr; Back to Clue 8</a><a href="../implications.html">Part 3 &rarr;</a></nav>
+<main class="wrap">
+  <header class="head">
+    <div>
+      <div class="overline">OBVIOUS / Clue 8 / ARCHITECTURE DEMONSTRATION</div>
+      <h1>A pattern repository. Two coupled loops.</h1>
+      <p class="lead">A visual model of the learning-and-storage loop and the on-demand recall loop: one symbolic pattern substrate, two complementary flows.</p>
+    </div>
+    <div class="stamp">ANIMATED CONCEPT · NOT A BENCHMARK</div>
+  </header>
+  <section class="toolbar" aria-label="Demonstration controls">
+    <div class="group"><span class="tag">INPUT</span><button type="button" id="sequence" aria-pressed="true">Sequence</button><button type="button" id="image" aria-pressed="false">Image</button></div>
+    <div class="group"><span class="tag">INFERENCE</span><button type="button" id="classify" aria-pressed="true">Classify</button><button type="button" id="predict" aria-pressed="false">Predict next</button></div>
+    <div class="group"><button class="primary" type="button" id="play">Pause animation</button><button type="button" id="prev">◀ Previous</button><button type="button" id="next">Next ▶</button></div>
+  </section>
+  <div class="progress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <section class="diagram" id="diagram" aria-label="Click any of the six phases to explain it">
+    <svg class="links" id="links" aria-hidden="true"></svg>
+    <div class="grid">
+      <button class="step current" data-step="0" type="button" aria-label="Stage 1: input sample">
+        <span class="topline"><span class="count">01 / SAMPLE</span><span class="status">INPUT</span></span>
+        <span class="cardtitle">Observe</span>
+        <span class="desc">Sequence, image, or another quantized stream.</span>
+        <span class="inner" id="sampleBody"><span class="seq">A <b>B R A</b> C A D A B R A</span><span class="smallnote mono">raw atomic input symbols</span></span>
+      </button>
+      <button class="step" data-step="1" type="button" aria-label="Stage 2: mask decomposition">
+        <span class="topline"><span class="count">02 / MASK</span><span class="status">LOCAL</span></span>
+        <span class="cardtitle">Decompose</span>
+        <span class="desc">All admissible subpatterns, or a sampled subset.</span>
+        <span class="inner"><span class="patterns" id="patternBody"></span><span class="smallnote mono" id="patternNote">symbolic keys · 3…5 tokens</span></span>
+      </button>
+      <button class="step" data-step="2" type="button" aria-label="Stage 3: optional population inference">
+        <span class="topline"><span class="count">03 / INFER</span><span class="status">OPTIONAL</span></span>
+        <span class="cardtitle">Compare populations</span>
+        <span class="desc">Similarity against active trained populations.</span>
+        <span class="inner" id="inferBody"></span>
+      </button>
+      <button class="step" data-step="3" type="button" aria-label="Stage 4: update or insert RAM dictionary entries">
+        <span class="topline"><span class="count">04 / LEARN</span><span class="status">RAM</span></span>
+        <span class="cardtitle">Update dictionary</span>
+        <span class="desc">Existing key → update attributes; absent key → insert.</span>
+        <span class="inner"><span class="mutations" id="ramBody"></span></span>
+      </button>
+      <button class="step" data-step="4" type="button" aria-label="Stage 5: merge RAM chunks into persistent repository">
+        <span class="topline"><span class="count">05 / SPILL & MERGE</span><span class="status">STORAGE</span></span>
+        <span class="cardtitle">Persist & prune</span>
+        <span class="desc">Merge RAM populations into the disk repository.</span>
+        <span class="inner"><span class="repoViz"><span class="storage"><strong>+</strong><span>RAM delta <small>add / update / remove</small></span></span><span class="storage stack2"><strong>⇄</strong><span>Keyed disk merge <small>shared identifiers + rules</small></span></span><span class="storage stack3"><strong>▤</strong><span>Out-of-core store <small>large / durable / searchable</small></span></span></span><span class="smallnote mono">peer chunks ↔ shared atomic IDs</span></span>
+      </button>
+      <button class="step soft" data-step="5" type="button" aria-label="Stage 6: retrieve overlapping context-selected experts into RAM">
+        <span class="topline"><span class="count">06 / RECALL</span><span class="status future">ARCHITECTURE</span></span>
+        <span class="cardtitle">Retrieve soft experts</span>
+        <span class="desc">On demand: context ranks pattern sets; overlaps allowed.</span>
+        <span class="inner"><span class="experts" id="expertBody"></span><span class="smallnote mono">prompt + memory → relevance → RAM</span></span>
+      </button>
+    </div>
+  </section>
+  <section class="detail" aria-live="polite">
+    <div><div class="overline" id="detailStep">STEP 01 / OBSERVE</div><h2 id="detailTitle">One input becomes evidence</h2><p id="detailText"></p></div>
+    <div class="detailRight"><div class="tag" id="detailAsideTitle">DESIGN PRINCIPLE</div><p id="detailAside"></p></div>
+  </section>
+  <p class="foot"><b>Read the arrows:</b> left → right across the top, down to RAM, then left through external storage and recall. The lower return arc loads selected patterns back into RAM on demand; the short reverse arrow supplies inference. These are connected loops, not a mandatory six-step sequence: inference is optional, disk flush is capacity-triggered, and recall is context-triggered. The dashed recall card shows a proposed composition of operations; no end-to-end disk-paging benchmark is supplied. Toy pattern keys and similarity bars are illustrative, not measured results. <b>Shared atomic encoding and consistent merge semantics</b> are prerequisites for distributed contributions.</p>
+</main>
+
+<script src="../assets/js/c8-architecture.js"></script>
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

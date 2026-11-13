@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OBVIOUS — Part 3: What Might This Explain? (PopMan)</title>
+  <link rel="stylesheet" href="assets/css/implications.css">
+<link rel="stylesheet" href="assets/css/common.css">
+  <meta name="description" content="Patterns Populations Management (PopMan, or Pops): multimodal pattern learning, fourteen architectural opportunities, and twenty-six explanatory targets.">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand"><span>OBVIOUS</span> // ARCHITECTURE LAB</a>
+      <div class="nav-links">
+        <a href="index.html">1. Dead End</a>
+        <a href="clues.html">2. The Clues &amp; Lab</a>
+        <a href="implications.html" class="active" aria-current="page">3. What Might This Explain?</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" id="main-content">
+    <header>
+      <div class="eyebrow">Part 3 of 3 — Architectural Opportunities &amp; Explanatory Targets</div>
+      <h1>WHAT MIGHT THIS EXPLAIN?</h1>
+      <p class="subtitle">
+        We began with a seemingly impossible combinatorial space. We then explored how structured experience, integration, reusable patterns, and interacting populations might make that space computationally useful.
+      </p>
+    </header>
+
+    <!-- Practitioner Note & Status Legend -->
+    <div class="practitioner-bar">
+      <div>
+        <strong>Practitioner's Note:</strong> As in the earlier parts, these are offered as <strong>clues and candidate targets</strong>, not conclusions. Blue links open runnable labs or recorded demonstrations; gold links open architecture animations. These examples illustrate related operations and do not by themselves establish the proposed explanation.
+      </div>
+      <div class="badge-legend">
+        <span class="tag tag-obs">Tier A: Established Phenomenon</span>
+        <span class="tag tag-design">Tier B: Plausible Mapping</span>
+        <span class="tag tag-conj">Tier C: Speculative Conjecture</span>
+        <span class="tag tag-demo">Lab / Recorded Demonstration</span><span class="tag tag-design">Design / Architecture</span>
+      </div>
+    </div>
+
+    <!-- PopMan architecture and intelligence contract -->
+    <section class="popman-hero">
+      <div>
+        <h2>Patterns Populations Management <span>— PopMan</span></h2>
+        <p>
+          <strong>Patterns Populations Management (PopMan)</strong>, nicknamed <strong>Pops</strong>, manages encountered combinations as explicitly identifiable, attributed, and reusable computational objects. Its pattern store natively accepts, combines, prunes, and infers over encoded multimodal inputs.
+        </p>
+        <p>
+          Pattern populations grow, forget, reorganize, associate, and activate across levels of complexity. Distributed population evidence and explicit symbolic identities support the same <strong>intelligence contract</strong> across sensory and effector channels:
+        </p>
+        <div class="intelligence-contract" role="group" aria-label="Intelligence contract: input matrix to brain processor to output matrix for effectors">
+          <div><strong>Input matrix</strong><span>Sensory channels</span></div>
+          <span class="contract-arrow" aria-hidden="true">&rarr;</span>
+          <div><strong>Brain / processor</strong><span>PopMan pattern populations</span></div>
+          <span class="contract-arrow" aria-hidden="true">&rarr;</span>
+          <div><strong>Output matrix</strong><span>Effector channels</span></div>
+        </div>
+        <p class="contract-note">The contract describes how the architecture connects perception, processing, and action. The experimental applications below remain unfinished.</p>
+      </div>
+      <div class="two-questions-box">
+        <span class="q-title">Two Questions Follow:</span>
+        <a href="#section-d1" class="q-link">
+          <strong>3.1.</strong> Which problems of conventional AI might this architecture address? (14 opportunities) &darr;
+        </a>
+        <a href="#section-d2" class="q-link">
+          <strong>3.2.</strong> Which biological and psychological phenomena might it help explain? (26 candidate targets) &darr;
+        </a>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- SECTION D1: 14 PROBLEMS OF CONVENTIONAL AI                         -->
+    <!-- ================================================================== -->
+    <p class="evidence-note"><a href="clues.html#clue-10">Clue 10 — Context-Guided Generation</a> now provides a runnable example of incremental pattern learning, inspectable continuation choices, and live context ranking. It also saves and restores whole learned World Models. These operations illustrate parts of the opportunities below; automatic expert extraction and distributed learning remain architectural proposals.</p>
+    <section class="part-section" id="section-d1">
+      <div class="section-header">
+        <div>
+          <div class="section-num">Section 3.1 // Conventional AI Bottlenecks</div>
+          <h2 class="section-title">Which problems of conventional AI might this architecture address?</h2>
+        </div>
+        <span class="tag tag-design">14 Architectural Opportunities</span>
+      </div>
+      <p class="section-lead">
+        Fourteen opportunities, grouped by theme or viewable in original numerical order (1–14). Where an item connects to a Part 2 experiment, click the citation badge to inspect the corresponding clue.
+      </p>
+      <aside class="multimodal-note" aria-labelledby="multimodal-learning-title">
+        <h3 id="multimodal-learning-title">Multimodal learning is native to the pattern store</h3>
+        <p>PopMan uses the same pattern-management operations to acquire, combine, prune, and infer over multiple encoded input channels. The channels can describe different measurements or different kinds of sensory evidence.</p>
+        <ul>
+          <li><strong>MNIST:</strong> pixel patterns plus gaze movement combine visual observations with the displacement of the sensor.</li>
+          <li><strong>Stox:</strong> open price and volume, alongside high, low, and close, supply distinct market-input channels.</li>
+        </ul>
+        <p>These experiments are not completed. Their unfinished status is separate from the store's native ability to handle multimodal patterns. <a href="clues.html#c7-channels">Clue 7: multimodal inputs &rarr;</a></p>
+      </aside>
+
+      <noscript><p class="evidence-note">All entries are shown below. Enable JavaScript to use the theme and tier filters.</p></noscript>
+      <!-- D1 Filter & View Controls -->
+      <div class="toolbar-bar">
+        <div class="filter-group" id="d1-theme-filters">
+          <span class="filter-label">Filter Theme:</span>
+          <button type="button" class="filter-btn active" data-filter="all">All (14)</button>
+          <button type="button" class="filter-btn" data-filter="Learning">Learning (5)</button>
+          <button type="button" class="filter-btn" data-filter="Inference and transparency">Inference &amp; Transparency (3)</button>
+          <button type="button" class="filter-btn" data-filter="Knowledge as manageable objects">Knowledge as Objects (5)</button>
+          <button type="button" class="filter-btn" data-filter="Heterogeneous inputs">Heterogeneous Inputs (1)</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Layout:</span>
+          <button type="button" class="filter-btn active" id="d1-mode-grouped">Grouped by Theme</button>
+          <button type="button" class="filter-btn" id="d1-mode-seq">Sequential (1–14)</button>
+        </div>
+      </div>
+
+      <!-- Dynamic D1 Container -->
+      <div id="d1-container">
+            <div class="group-block">
+              <div class="group-header">
+                <h3>Learning</h3>
+                <span>Incremental adaptation, local updates, and structural plasticity (5)</span>
+              </div>
+              <div class="items-grid">
+        <article class="item-card" id="item-3-1-1" data-num="1" data-group="Learning">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #1</span>
+              <div class="item-badges">
+                
+                <a href="clues.html#c5-learning" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 5 in Part 2">Clue 5 &rarr;</a>
+              </div>
+            </div>
+            <h4>Continual learning without catastrophic forgetting</h4>
+            <p>Acquire patterns incrementally from encoded input channels, potentially from a single encounter, without repeatedly retraining an entire network. Add new structures and update local attributes while retaining established experience. Managing interference and capacity remains necessary.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-1-2" data-num="2" data-group="Learning">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #2</span>
+              <div class="item-badges">
+                
+                <a href="clues.html#c5-learning" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 5 in Part 2">Clue 5 &rarr;</a>
+              </div>
+            </div>
+            <h4>The stability–plasticity dilemma</h4>
+            <p>Use the same store operations across input modalities: acquire and combine patterns, reinforce useful evidence, weaken or prune selected structures, and infer from retained populations. Retention and adaptation can be managed together as experience accumulates.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-1-3" data-num="3" data-group="Learning">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #3</span>
+              <div class="item-badges">
+                
+                <a href="clues.html#c5-learning" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 5 in Part 2">Clue 5 &rarr;</a>
+              </div>
+            </div>
+            <h4>Dependence on global gradient-based training</h4>
+            <p>Learn through local combinatorial discovery and attribute updates, without backpropagation. Unsupervised, supervised, and reinforcement signals can shape the same growing pattern populations, including populations formed from multimodal inputs.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-1-4" data-num="4" data-group="Learning">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #4</span>
+              <div class="item-badges">
+                
+                <a href="clues.html#c5-learning" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 5 in Part 2">Clue 5 &rarr;</a><a href="clues.html#c7-channels" class="cite-pill cite-demo" title="Unfinished multimodal experiments: Clue 7 in Part 2">Clue 7 &rarr;</a>
+              </div>
+            </div>
+            <h4>Fixed network architectures</h4>
+            <p>Create patterns within and across encoded input channels, strengthen associations, reuse common substructures, prune selected patterns, and reorganize populations as experience accumulates. MNIST with gaze movement and Stox market channels are unfinished applications of this shared architecture.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-1-5" data-num="5" data-group="Learning">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #5</span>
+              <div class="item-badges">
+                
+                <a href="clues.html#c3-sinusoids" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 3 in Part 2">Clue 3 &rarr;</a><a href="clues.html#c4-clustering" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 4 in Part 2">Clue 4 &rarr;</a>
+              </div>
+            </div>
+            <h4>Learning from incomplete and noisy evidence</h4>
+            <p>Compare populations of overlapping patterns instead of demanding exact matches, so that collective evidence may preserve useful similarity under missing, jittered, or corrupted input.</p>
+            
+          </div>
+        </article>
+      </div>
+            </div>
+          
+            <div class="group-block">
+              <div class="group-header">
+                <h3>Inference and transparency</h3>
+                <span>Bidirectional recall, inspectable contributions, and symbolic-subsymbolic unity (3)</span>
+              </div>
+              <div class="items-grid">
+        <article class="item-card" id="item-3-1-6" data-num="6" data-group="Inference and transparency">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #6</span>
+              <div class="item-badges">
+                
+                <a href="clues.html#c2-temporal" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 2 in Part 2">Clue 2 &rarr;</a><a href="clues.html#c6-generation" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 6 in Part 2">Clue 6 &rarr;</a>
+              </div>
+            </div>
+            <h4>Limited bidirectional associative access</h4>
+            <p>Use one substrate for recognition, recall, prediction, and generation: infer a whole from its parts, a missing part from context, or a likely continuation from preceding evidence.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-1-8" data-num="8" data-group="Inference and transparency">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #8</span>
+              <div class="item-badges">
+                
+                
+              </div>
+            </div>
+            <h4>Opaque representations and inference</h4>
+            <p>Preserve the identities, associations, and contributions of participating patterns, so that even when thousands of detectors contribute to a decision, their contributions can be inspected. Inspectability is not the same as interpretability, but higher-order patterns may eventually acquire human-readable names.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-1-12" data-num="12" data-group="Inference and transparency">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #12</span>
+              <div class="item-badges">
+                
+                
+              </div>
+            </div>
+            <h4>Poorly connected symbolic and subsymbolic computation</h4>
+            <p>Keep distributed, population-based evidence accumulation while giving each retained pattern an explicit symbolic identity, so that operations over identifiable structures need no separate symbolic reasoning engine.</p>
+            
+          </div>
+        </article>
+      </div>
+            </div>
+          
+            <div class="group-block">
+              <div class="group-header">
+                <h3>Knowledge as manageable objects</h3>
+                <span>Modular repositories, keyed merges, and out-of-core scaling (5)</span>
+              </div>
+              <div class="items-grid">
+        <article class="item-card" id="item-3-1-7" data-num="7" data-group="Knowledge as manageable objects">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #7</span>
+              <div class="item-badges">
+                
+                
+              </div>
+            </div>
+            <h4>Separation of knowledge and inference machinery</h4>
+            <p>Make learned structures independently identifiable, searchable, transferable, and selectively activatable, so knowledge can be updated without reconstructing the whole inference engine.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-1-9" data-num="9" data-group="Knowledge as manageable objects">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #9</span>
+              <div class="item-badges">
+                
+                <a href="clues.html#c8-presentations" class="cite-pill cite-design" title="Architecture animation: Clue 8 in Part 2">Clue 8 &rarr;</a>
+              </div>
+            </div>
+            <h4>Expensive monolithic model storage and activation</h4>
+            <p>Keep a large persistent repository and load only context-relevant populations into working memory, so resource needs follow the active submodel rather than the entire repository.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-1-10" data-num="10" data-group="Knowledge as manageable objects">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #10</span>
+              <div class="item-badges">
+                
+                <a href="clues.html#c8-presentations" class="cite-pill cite-design" title="Architecture animation: Clue 8 (Architectural Implication) in Part 2">Clue 8 (Architectural Implication) &rarr;</a>
+              </div>
+            </div>
+            <h4>Difficult distributed learning and model merging</h4>
+            <p>Combine independently acquired populations through compatible symbolic keys and mergeable attributes. With well-defined update semantics, distributed discovery need not exchange full training datasets or average global weight matrices.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-1-13" data-num="13" data-group="Knowledge as manageable objects">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #13</span>
+              <div class="item-badges">
+                
+                <a href="clues.html#c3-sinusoids" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 3 in Part 2">Clue 3 &rarr;</a><a href="clues.html#c4-clustering" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 4 in Part 2">Clue 4 &rarr;</a><a href="clues.html#c8-presentations" class="cite-pill cite-design" title="Architecture animation: Clue 8 in Part 2">Clue 8 &rarr;</a>
+              </div>
+            </div>
+            <h4>Context-dependent expertise and transfer</h4>
+            <p>Compare a new input against many learned populations, retrieve relevant subsets of a larger repository, and combine previously developed structures in unfamiliar contexts.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-1-14" data-num="14" data-group="Knowledge as manageable objects">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #14</span>
+              <div class="item-badges">
+                
+                <a href="clues.html#c8-presentations" class="cite-pill cite-design" title="Architecture animation: Clue 8 in Part 2">Clue 8 &rarr;</a>
+              </div>
+            </div>
+            <h4>Scaling beyond available working memory</h4>
+            <p>Use RAM for active learning and inference, persistent storage for accumulated experience, and hierarchical reuse so that complex patterns need not each be stored as independent objects.</p>
+            
+          </div>
+        </article>
+      </div>
+            </div>
+          
+            <div class="group-block">
+              <div class="group-header">
+                <h3>Heterogeneous inputs</h3>
+                <span>Per-channel hierarchies and cross-modal binding (1)</span>
+              </div>
+              <div class="items-grid">
+        <article class="item-card" id="item-3-1-11" data-num="11" data-group="Heterogeneous inputs">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.1 #11</span>
+              <div class="item-badges">
+                
+                <a href="clues.html#c7-channels" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 7 in Part 2">Clue 7 &rarr;</a>
+              </div>
+            </div>
+            <h4>Rigid handling of heterogeneous inputs</h4>
+            <p>Consume, combine, prune, and infer over encoded multimodal inputs within the native pattern store. MNIST combines pixel patterns with gaze movement; Stox combines market channels such as open price and volume. Both experiments remain unfinished. The common intelligence contract is input matrix → brain / processor → output matrix for effectors.</p>
+            
+          </div>
+        </article>
+      </div>
+            </div>
+          </div>
+
+      <!-- D1 Scope & Claim Box -->
+      <div class="scope-box">
+        <h3>What Is and Is Not Being Claimed</h3>
+        <p>
+          These are architectural opportunities, not declarations of universal superiority. Several have been explored in limited experiments; others remain engineering conjectures. Modern AI already has partial or alternative solutions to portions of these problems (replay and regularization for forgetting, expert routing and retrieval for conditional computation, model merging for combining models).
+        </p>
+        <p class="scope-highlight">
+          The proposed advantage is their possible integration within one continually changing computational substrate.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- SECTION D2: 26 BIOLOGICAL & PSYCHOLOGICAL PHENOMENA                -->
+    <!-- ================================================================== -->
+    <section class="part-section" id="section-d2">
+      <div class="section-header">
+        <div>
+          <div class="section-num">Section 3.2 // Biological &amp; Psychological Targets</div>
+          <h2 class="section-title">Which biological and psychological phenomena might this architecture help explain?</h2>
+        </div>
+        <span class="tag tag-neutral">26 Candidate Explanatory Targets</span>
+      </div>
+      <p class="section-lead">
+        Twenty-six candidate targets. Tier A links independent evidence for the phenomena; all PopMan accounts remain proposals. Tier B groups plausible mappings, and Tier C groups more speculative accounts. View them by tier or in numerical order (1–26).
+      </p>
+
+      <!-- D2 Filter & View Controls -->
+      <div class="toolbar-bar">
+        <div class="filter-group" id="d2-tier-filters">
+          <span class="filter-label">Filter Tier:</span>
+          <button type="button" class="filter-btn active" data-filter="all">All (26)</button>
+          <button type="button" class="filter-btn" data-filter="Tier A">Tier A: Established Phenomenon (7)</button>
+          <button type="button" class="filter-btn" data-filter="Tier B">Tier B: Plausible Mappings (9)</button>
+          <button type="button" class="filter-btn" data-filter="Tier C">Tier C: Speculative &amp; Affective (10)</button>
+        </div>
+        <div class="filter-group">
+          <span class="filter-label">Layout:</span>
+          <button type="button" class="filter-btn active" id="d2-mode-grouped">Grouped by Support Tier</button>
+          <button type="button" class="filter-btn" id="d2-mode-seq">Sequential (1–26)</button>
+        </div>
+      </div>
+
+      <!-- Dynamic D2 Container -->
+      <div id="d2-container">
+            <div class="group-block">
+              <div class="group-header tier-a">
+                <h3>Tier A: Established phenomena; proposed computational accounts</h3>
+                <span class="tag tag-obs">Tier A // Independent Evidence (7)</span>
+              </div>
+              <div class="items-grid">
+        <article class="item-card" id="item-3-2-1" data-num="1" data-group="Tier A">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #1</span>
+              <div class="item-badges">
+                <span class="tag tag-obs" style="font-size:0.65rem;">Tier A</span>
+                <a href="clues.html#clues-2-3" class="cite-pill cite-demo" title="Principles 2 & 3: integration and equivalence classes">Principles 2 & 3 &rarr;</a><a href="clues.html#c1-spatial" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 1 in Part 2">Clue 1 &rarr;</a>
+              </div>
+            </div>
+            <h4>Neuronal coincidence detection and integration</h4>
+            <p>How thousands of graded, spatially distributed, and temporally overlapping synaptic contributions can produce selective output events. A spike identifies an integration outcome, not the exact combination responsible.</p>
+            <p class="independent-evidence">Independent evidence: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC16678/" target="_blank" rel="noopener noreferrer">Azouz & Gray (2000): coincidence sensitivity</a>. The proposed PopMan account remains to be tested.</p>
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-2" data-num="2" data-group="Tier A">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #2</span>
+              <div class="item-badges">
+                <span class="tag tag-obs" style="font-size:0.65rem;">Tier A</span>
+                
+              </div>
+            </div>
+            <h4>Dynamic receptive fields and selectivity</h4>
+            <p>How a neuron or population can respond to several related input configurations, and how its effective receptive field changes with synaptic strength, activity, context, and structural adaptation.</p>
+            <p class="independent-evidence">Independent evidence: <a href="https://pubmed.ncbi.nlm.nih.gov/12949232/" target="_blank" rel="noopener noreferrer">Brecht et al. (2003): dynamic receptive fields</a>. The proposed PopMan account remains to be tested.</p>
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-3" data-num="3" data-group="Tier A">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #3</span>
+              <div class="item-badges">
+                <span class="tag tag-obs" style="font-size:0.65rem;">Tier A</span>
+                <a href="clues.html#c1-spatial" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 1 in Part 2">Clue 1 &rarr;</a><a href="clues.html#c3-sinusoids" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 3 in Part 2">Clue 3 &rarr;</a>
+              </div>
+            </div>
+            <h4>Sparse and distributed population coding</h4>
+            <p>How many overlapping detectors can jointly represent an object, category, or event without requiring one neuron per possible combination.</p>
+            <p class="independent-evidence">Independent evidence: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4084456/" target="_blank" rel="noopener noreferrer">Sparse and distributed coding of episodic memory (2014)</a>. The proposed PopMan account remains to be tested.</p>
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-4" data-num="4" data-group="Tier A">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #4</span>
+              <div class="item-badges">
+                <span class="tag tag-obs" style="font-size:0.65rem;">Tier A</span>
+                <a href="clues.html#c6-generation" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 6 in Part 2">Clue 6 &rarr;</a>
+              </div>
+            </div>
+            <h4>Associative memory and content-addressable recall</h4>
+            <p>How partial cues reactivate previously established populations, so that a remembered object or experience can be reconstructed from incomplete evidence.</p>
+            <p class="independent-evidence">Independent evidence: <a href="https://pubmed.ncbi.nlm.nih.gov/12040087/" target="_blank" rel="noopener noreferrer">Nakazawa et al. (2002): partial-cue recall</a>. The proposed PopMan account remains to be tested.</p>
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-5" data-num="5" data-group="Tier A">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #5</span>
+              <div class="item-badges">
+                <span class="tag tag-obs" style="font-size:0.65rem;">Tier A</span>
+                <a href="clues.html#c3-sinusoids" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 3 in Part 2">Clue 3 &rarr;</a><a href="clues.html#c6-generation" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 6 in Part 2">Clue 6 &rarr;</a>
+              </div>
+            </div>
+            <h4>Pattern separation and pattern completion</h4>
+            <p>How similar experiences can yield distinguishable representations while incomplete observations still recover a familiar whole.</p>
+            <p class="independent-evidence">Independent evidence: <a href="https://pubmed.ncbi.nlm.nih.gov/17303747/" target="_blank" rel="noopener noreferrer">Leutgeb et al. (2007): pattern separation</a>; <a href="https://pubmed.ncbi.nlm.nih.gov/12040087/" target="_blank" rel="noopener noreferrer">Nakazawa et al. (2002): pattern completion</a>. The proposed PopMan account remains to be tested.</p>
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-7" data-num="7" data-group="Tier A">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #7</span>
+              <div class="item-badges">
+                <span class="tag tag-obs" style="font-size:0.65rem;">Tier A</span>
+                <a href="clues.html#c2-temporal" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 2 in Part 2">Clue 2 &rarr;</a>
+              </div>
+            </div>
+            <h4>Working memory and persistence</h4>
+            <p>How circulating or sustained activity can preserve information after the sensory input disappears, making it available to subsequent computation.</p>
+            <p class="independent-evidence">Independent evidence: <a href="https://pubmed.ncbi.nlm.nih.gov/2918358/" target="_blank" rel="noopener noreferrer">Funahashi et al. (1989): delay-period activity</a>. The proposed PopMan account remains to be tested.</p>
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-10" data-num="10" data-group="Tier A">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #10</span>
+              <div class="item-badges">
+                <span class="tag tag-obs" style="font-size:0.65rem;">Tier A</span>
+                <a href="clues.html#c5-learning" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 5 in Part 2">Clue 5 &rarr;</a>
+              </div>
+            </div>
+            <h4>Synaptic learning and structural plasticity</h4>
+            <p>How local changes in connection strength, connectivity, and activation thresholds can progressively shape a network's useful pattern populations.</p>
+            <p class="independent-evidence">Independent evidence: <a href="https://pubmed.ncbi.nlm.nih.gov/12490942/" target="_blank" rel="noopener noreferrer">Trachtenberg et al. (2002): structural plasticity</a>. The proposed PopMan account remains to be tested.</p>
+          </div>
+        </article>
+      </div>
+            </div>
+          
+            <div class="group-block">
+              <div class="group-header tier-b">
+                <h3>Tier B: Plausible mappings that still need to be specified</h3>
+                <span class="tag tag-design">Tier B // Plausible Mapping (9)</span>
+              </div>
+              <div class="items-grid">
+        <article class="item-card" id="item-3-2-6" data-num="6" data-group="Tier B">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #6</span>
+              <div class="item-badges">
+                <span class="tag tag-design" style="font-size:0.65rem;">Tier B</span>
+                <a href="clues.html#c2-temporal" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 2 in Part 2">Clue 2 &rarr;</a>
+              </div>
+            </div>
+            <h4>Temporal binding and sequence memory</h4>
+            <p>How fast and slow synaptic effects, sustained activation, and recurrent circuits might turn events spread through time into combinations available for recognition and prediction.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-8" data-num="8" data-group="Tier B">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #8</span>
+              <div class="item-badges">
+                <span class="tag tag-design" style="font-size:0.65rem;">Tier B</span>
+                <a href="clues.html#c7-channels" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 7 in Part 2">Clue 7 &rarr;</a>
+              </div>
+            </div>
+            <h4>Hierarchical perception and concept formation</h4>
+            <p>How simpler detectors are reused as constituents of increasingly complex patterns, giving selective representations of objects, categories, relationships, and potentially recognizable concepts.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-9" data-num="9" data-group="Tier B">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #9</span>
+              <div class="item-badges">
+                <span class="tag tag-design" style="font-size:0.65rem;">Tier B</span>
+                <a href="clues.html#c2-temporal" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 2 in Part 2">Clue 2 &rarr;</a>
+              </div>
+            </div>
+            <h4>Prediction and predictive perception</h4>
+            <p>How partially activated patterns bias the activation of expected continuations, so that recognition and prediction become related operations using different amounts of evidence.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-11" data-num="11" data-group="Tier B">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #11</span>
+              <div class="item-badges">
+                <span class="tag tag-design" style="font-size:0.65rem;">Tier B</span>
+                <a href="clues.html#c5-learning" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 5 in Part 2">Clue 5 &rarr;</a>
+              </div>
+            </div>
+            <h4>Neuromodulation, reward, and behavioral reinforcement</h4>
+            <p>How more global chemical signals might alter the retention, reinforcement, or weakening of locally activated structures, letting unsupervised, supervised-like, and reinforcement processes coexist.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-12" data-num="12" data-group="Tier B">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #12</span>
+              <div class="item-badges">
+                <span class="tag tag-design" style="font-size:0.65rem;">Tier B</span>
+                <a href="clues.html#c5-learning" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 5 in Part 2">Clue 5 &rarr;</a><a href="clues.html#c8-presentations" class="cite-pill cite-design" title="Architecture animation: Clue 8 in Part 2">Clue 8 &rarr;</a>
+              </div>
+            </div>
+            <h4>Forgetting, consolidation, and sleep</h4>
+            <p>Why continual learning may require periodic weakening, elimination, merging, and restructuring of patterns, and how offline reactivation could preserve important associations while reducing interference and resource demands.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-13" data-num="13" data-group="Tier B">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #13</span>
+              <div class="item-badges">
+                <span class="tag tag-design" style="font-size:0.65rem;">Tier B</span>
+                <a href="clues.html#c8-presentations" class="cite-pill cite-design" title="Architecture animation: Clue 8 in Part 2">Clue 8 &rarr;</a>
+              </div>
+            </div>
+            <h4>Attention and context-dependent activation</h4>
+            <p>How competition, inhibition, and contextual evidence might recruit particular pattern populations while suppressing irrelevant alternatives.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-17" data-num="17" data-group="Tier B">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #17</span>
+              <div class="item-badges">
+                <span class="tag tag-design" style="font-size:0.65rem;">Tier B</span>
+                <a href="clues.html#c3-sinusoids" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 3 in Part 2">Clue 3 &rarr;</a><a href="clues.html#c4-clustering" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 4 in Part 2">Clue 4 &rarr;</a>
+              </div>
+            </div>
+            <h4>Familiarity, novelty, and surprise</h4>
+            <p>How the degree of agreement between incoming evidence and retained populations could signal familiarity, unexpectedness, ambiguity, or discovery.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-19" data-num="19" data-group="Tier B">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #19</span>
+              <div class="item-badges">
+                <span class="tag tag-design" style="font-size:0.65rem;">Tier B</span>
+                <a href="clues.html#c4-clustering" class="cite-pill cite-demo" title="Lab / recorded demonstration: Clue 4 in Part 2">Clue 4 &rarr;</a>
+              </div>
+            </div>
+            <h4>Generalization and transfer of experience</h4>
+            <p>How previously learned components can join new configurations, so that unfamiliar objects or situations are understood through combinations of familiar structures.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-21" data-num="21" data-group="Tier B">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #21</span>
+              <div class="item-badges">
+                <span class="tag tag-design" style="font-size:0.65rem;">Tier B</span>
+                <a href="clues.html#c9-activations" class="cite-pill cite-demo" title="Clue: see Clue 9 in Part 2">see Clue 9 &rarr;</a>
+              </div>
+            </div>
+            <h4>Roles of fast and slow synapses</h4>
+            <p>How different synaptic time courses might let highly selective, high-complexity patterns contribute to inference first, while slower effects sustain context and fallback persistence.</p>
+            
+          </div>
+        </article>
+      </div>
+            </div>
+          
+            <div class="group-block">
+              <div class="group-header tier-c">
+                <h3>Tier C: Speculative, resting on additional conjectures</h3>
+                <span class="tag tag-conj">Tier C // Conjectural & Affective (10)</span>
+              </div>
+              <div class="items-grid">
+        <article class="item-card" id="item-3-2-14" data-num="14" data-group="Tier C">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #14</span>
+              <div class="item-badges">
+                <span class="tag tag-conj" style="font-size:0.65rem;">Tier C</span>
+                
+              </div>
+            </div>
+            <h4>Intuition and subconscious inference</h4>
+            <p>How thousands of individually identifiable but collectively operating patterns might produce a judgment before any compact, human-describable explanation is available. Intuition could be the result of extensive distributed evidence accumulation.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-15" data-num="15" data-group="Tier C">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #15</span>
+              <div class="item-badges">
+                <span class="tag tag-conj" style="font-size:0.65rem;">Tier C</span>
+                
+              </div>
+            </div>
+            <h4>Thinking without immediate sensory input</h4>
+            <p>How retained patterns might reactivate one another through recurrent associations, creating internally generated sequences of activation that could contribute to memory rehearsal, imagination, planning, and spontaneous thought.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-16" data-num="16" data-group="Tier C">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #16</span>
+              <div class="item-badges">
+                <span class="tag tag-conj" style="font-size:0.65rem;">Tier C</span>
+                
+              </div>
+            </div>
+            <h4>Dreaming and creative recombination</h4>
+            <p>How offline activity and changing connection strengths might generate unfamiliar combinations of established patterns, some discarded and others retained as useful new associations.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-18" data-num="18" data-group="Tier C">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #18</span>
+              <div class="item-badges">
+                <span class="tag tag-conj" style="font-size:0.65rem;">Tier C</span>
+                
+              </div>
+            </div>
+            <h4>Curiosity, boredom, and exploration</h4>
+            <p>If biological systems monitor the condition of their learned connections and the availability of meaningful reinforcement, declining stimulation or unmet plasticity demands might contribute to exploration-seeking behavior. This needs additional mechanisms connecting neural state to motivation and subjective experience.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-20" data-num="20" data-group="Tier C">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #20</span>
+              <div class="item-badges">
+                <span class="tag tag-conj" style="font-size:0.65rem;">Tier C</span>
+                <a href="clues.html#clue-5" class="cite-pill cite-design" title="Architectural conjecture: Principle 5 in Part 2">Principle 5 &rarr;</a>
+              </div>
+            </div>
+            <h4>The emergence of symbolic operations</h4>
+            <p>How identifiable, increasingly complex population structures might support operations resembling classification, association, comparison, composition, and eventually abstract reasoning.</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-22" data-num="22" data-group="Tier C">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #22</span>
+              <div class="item-badges">
+                <span class="tag tag-conj" style="font-size:0.65rem;">Tier C</span>
+                
+              </div>
+            </div>
+            <h4>Hypnosis</h4>
+            <p>How can expectations, attention, and internally activated associations alter perception, behavior, and even the experience of voluntary control?</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-23" data-num="23" data-group="Tier C">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #23</span>
+              <div class="item-badges">
+                <span class="tag tag-conj" style="font-size:0.65rem;">Tier C</span>
+                
+              </div>
+            </div>
+            <h4>Humor</h4>
+            <p>Why can an unexpected combination, particularly one that suddenly becomes comprehensible, produce pleasure and laughter?</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-24" data-num="24" data-group="Tier C">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #24</span>
+              <div class="item-badges">
+                <span class="tag tag-conj" style="font-size:0.65rem;">Tier C</span>
+                
+              </div>
+            </div>
+            <h4>Awe</h4>
+            <p>Why can encountering something vastly beyond our existing representations produce such a distinctive emotional response?</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-25" data-num="25" data-group="Tier C">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #25</span>
+              <div class="item-badges">
+                <span class="tag tag-conj" style="font-size:0.65rem;">Tier C</span>
+                
+              </div>
+            </div>
+            <h4>Pleasure and displeasure</h4>
+            <p>How do physical and computational states acquire positive or negative significance for the organism?</p>
+            
+          </div>
+        </article>
+      
+        <article class="item-card" id="item-3-2-26" data-num="26" data-group="Tier C">
+          <div>
+            <div class="item-top">
+              <span class="item-num">3.2 #26</span>
+              <div class="item-badges">
+                <span class="tag tag-conj" style="font-size:0.65rem;">Tier C</span>
+                
+              </div>
+            </div>
+            <h4>Wanting versus liking</h4>
+            <p>Why can we pursue something we do not particularly enjoy, or enjoy something we never actively sought?</p>
+            
+          </div>
+        </article>
+      </div>
+            </div>
+          </div>
+
+      <!-- D2 Scope & Limits Box -->
+      <div class="limits-box">
+        <h3>What This Does Not Explain</h3>
+        <p>
+          These are <strong>candidate explanatory targets</strong>, not established biological explanations. Tier A phenomena (such as integration, plasticity, associative recall, and temporal persistence) have substantial independent biological support; Tier C accounts (such as intuition, dreaming, curiosity, symbolic operations, hypnosis, humor, awe, and wanting vs. liking) involve additional conjectures.
+        </p>
+        <p>
+          The architecture does not yet explain subjective experience, consciousness, emotional valence, or the full biological mechanisms of motivation. Items 22–26 ask what computational signals might accompany these states, not what they feel like. Nevertheless, it offers a computational framework in which these questions can be formulated and investigated.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================================================================== -->
+    <!-- CLOSING THOUGHT                                                    -->
+    <!-- ================================================================== -->
+    <section class="closing-section">
+      <div class="eyebrow">Synthesis // Closing Thought</div>
+      <h2>The Curse Is Also Part of the Solution</h2>
+      <p>
+        The goal is neither to manufacture an exact biological neuron in silicon nor to declare an entirely new theory of intelligence. It is to identify a collection of computational principles compatible with what we know about biological neural systems, and to test whether their combinations reproduce increasingly interesting capabilities.
+      </p>
+      <p style="margin-bottom:0.5rem;">
+        We are particularly interested in the relationship between three things:
+      </p>
+
+      <div class="triad-grid">
+        <div class="triad-card">
+          <span>PILLAR 01</span>
+          <strong>Biological Plausibility</strong>
+        </div>
+        <div class="triad-card">
+          <span>PILLAR 02</span>
+          <strong>Computational Feasibility</strong>
+        </div>
+        <div class="triad-card">
+          <span>PILLAR 03</span>
+          <strong>Observable Intelligent Behavior</strong>
+        </div>
+      </div>
+
+      <p>
+        Agreement with biology does not establish correctness. Computational success does not establish biological equivalence. But if the same relatively simple combinatorial mechanisms can account for an expanding collection of computational behaviors while remaining compatible with biological observations, they deserve further investigation.
+      </p>
+
+      <div class="final-motto">
+        We started with the curse of combinatorics. Perhaps the curse is also part of the solution.
+        <strong>Fight combinatorics with combinatorics.</strong>
+      </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <div class="next-banner">
+      <div>
+        <strong style="font-size:1.05rem; display:block;">Explore the OBVIOUS Architecture Lab</strong>
+        <span style="color:var(--muted); font-size:0.88rem;">Jump back to Part 1 (Dead End) or re-run the interactive experiments in Part 2 (The Clues &amp; Lab).</span>
+      </div>
+      <div class="btn-row">
+        <a href="index.html" class="btn">&larr; Part 1: Dead End</a>
+        <a href="clues.html" class="btn btn-primary">&larr; Part 2: The Clues &amp; Interactive Labs</a>
+      </div>
+    </div>
+  </main>
+
+  
+<script src="assets/js/implications.js"></script>
+<script src="assets/js/shared.js"></script>
+</body>
+</html>

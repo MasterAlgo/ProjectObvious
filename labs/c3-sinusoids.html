@@ -1,0 +1,54 @@
+<!doctype html>
+<!-- Standalone snapshot of the 3Grams demo. Open this file directly in a browser. -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OBVIOUS — Clue 3: Sinusoid Population Lab</title>
+  <link rel="stylesheet" href="../assets/css/labs.css">
+<link rel="stylesheet" href="../assets/css/c3-sinusoids.css">
+  
+  <meta name="description" content="An Obvious computational lab. Interactive toy models and clearly labeled architectural demonstrations.">
+</head>
+<body>
+<nav class="lab-return" aria-label="Lab navigation"><a href="../index.html">OBVIOUS</a><a href="../clues.html#c3-sinusoids">&larr; Back to Clue 3</a><a href="../implications.html">Part 3 &rarr;</a></nav>
+  <main>
+    <header><div><div class="eyebrow">OBVIOUS / Clue 3</div><h1>3Grams <span>/ Structural lab</span></h1><p>Small observations. A population of patterns.</p></div><span class="badge">Clue 3 / POPULATION COMPARISON</span></header>
+    <section class="controls" aria-labelledby="sensor-title">
+      <div class="section-heading"><h2 id="sensor-title">Shared sensor</h2><span>One configuration for every stream</span></div>
+      <div class="control-grid">
+        <label>Step delay <span>milliseconds</span><input id="delay" type="number" min="16" max="5000" step="1" value="100"></label>
+        <label>Sample spacing <span>Δx</span><input id="spacing" type="number" min="0.01" max="10" step="0.01" value="0.2"></label>
+        <label>Quantization grades <span>Q · shared y-range</span><input id="grades" type="number" min="2" max="32" step="1" value="8"></label>
+        <label>Window size <span>sample positions</span><input id="window" type="number" min="3" max="12" step="1" value="12"></label>
+        <label>Minimum length <span>positions including misses</span><input id="minimum" type="number" min="3" max="12" step="1" value="3"></label><label>Window stride <span>sample positions</span><input id="stride" type="number" min="1" max="500" step="1" value="3"></label>
+        <label>Missed samples <span>per window · random</span><input id="skips" type="number" min="0" max="15" step="1" value="4"></label>
+        <label>Shared jitter <span>% of B · sets all slots</span><input id="jitter" type="number" min="0" max="200" step="1" value="0" title="Applies to every slot, including test. Individual slots can override afterward."></label>
+        <label>Training rows <span>independent streams</span><input id="rows" title="All 12 slots are reserved. Removing rows clears their evidence; other slots are preserved unless the common grade range changes." type="number" min="1" max="12" step="1" value="2"></label>
+      </div>
+      <div class="control-footer"><span id="sensor-summary"></span><div class="experiment-actions"><button id="start-all" type="button">Start all</button><button id="pause-all" type="button">Pause all</button><button id="reset" type="button">Reset experiment ↺</button></div></div>
+    </section>
+    <section class="storage-panel" aria-labelledby="storage-title">
+      <p class="lab-note">Compact browser profile: about 14.5 MiB of preallocated arrays, plus browser overhead. Dictionaries have fixed capacities; reaching a limit stops every stream and preserves committed evidence. This lab does not write patterns to disk.</p><div class="section-heading"><h2 id="storage-title">Shared pattern storage</h2><span id="storage-memory"></span></div>
+      <div class="storage-progress">
+        <label>Middle level <span id="middle-occupancy-label"></span><progress id="middle-occupancy" aria-label="Middle level occupancy" max="1" value="0"></progress></label>
+        <label>Largest level <span id="largest-occupancy-label"></span><progress id="largest-occupancy" aria-label="Largest level occupancy" max="1" value="0"></progress></label>
+      </div>
+      <div id="storage-error" role="alert" hidden></div>
+      <details id="bank-capacities" class="storage-detail"><summary id="bank-summary">Capacity by pattern length</summary><div class="storage-table"><table><thead><tr><th>Length</th><th>Collection</th><th>Middle</th><th>Largest</th></tr></thead><tbody id="storage-banks"></tbody></table></div></details>
+      <details id="failed-stride" class="storage-detail" hidden><summary>Inspect failed stride · not committed</summary><pre id="failed-stride-output"></pre></details>
+    </section>
+    <section class="test-section" aria-labelledby="test-title"><div class="training-heading"><h2 id="test-title">TEST / Mystery stream</h2><span class="test-note">Compare this stream against the training population</span></div><p class="comparison-help">TEST accumulates pattern frequencies in the shared dictionary. Two measures compare the same TEST and training evidence after each completed window. Each score row shows its own share across visible classes.</p><div class="comparison-controls"><div class="comparison-panel"><label for="similarity-measure">Measure A</label><select id="similarity-measure"><option value="overlap">Matching distinct patterns</option><option value="affinity">Frequency affinity by length</option><option value="weightedProduct">Pseudo-cosine (raw count product)</option><option value="contrastProduct">Extended pseudo-cosine (contrast)</option><option value="silhouette">Silhouette-inspired similarity</option><option value="selective">Selective evidence vote (64/length)</option><option value="selectiveRl">Selective evidence vote + RL</option><option value="layered">Layered evidence recruitment</option></select><div class="score-overview" aria-label="Measure A score shares"><span class="score-overview-label">Score share</span><div id="score-tiles" class="score-tiles"></div></div></div><div class="comparison-panel"><label for="secondary-similarity-measure">Measure B</label><select id="secondary-similarity-measure"><option value="overlap">Matching distinct patterns</option><option value="affinity" selected>Frequency affinity by length</option><option value="weightedProduct">Pseudo-cosine (raw count product)</option><option value="contrastProduct">Extended pseudo-cosine (contrast)</option><option value="silhouette">Silhouette-inspired similarity</option><option value="selective">Selective evidence vote (64/length)</option><option value="selectiveRl">Selective evidence vote + RL</option><option value="layered">Layered evidence recruitment</option></select><div class="score-overview" aria-label="Measure B score shares"><span class="score-overview-label">Score share</span><div id="secondary-score-tiles" class="score-tiles"></div></div></div><span id="silhouette-salience" hidden></span><span id="selective-voters" hidden></span><span id="rl-feedback" hidden></span><div class="feedback-controls"><label><input type="checkbox" id="feedback-enabled"> Teach from TEST using a supplied label</label><label>Correct training row <select id="feedback-target" aria-label="Correct training row for feedback"></select></label><p>Enable only when TEST belongs to the selected row. Feedback is applied to later comparisons; it is supervised feedback, not label-free inference.</p></div><span id="layered-recruitment" hidden></span><button id="reset-test" type="button">Restart TEST from x = 0</button></div><div id="test-row"></div></section>
+    <section aria-labelledby="training-title"><div class="training-heading"><h2 id="training-title">Training streams</h2><div class="legend"><span><i class="line"></i>Sine</span><span><i class="potential"></i>Potential sample</span><span><i class="actual"></i>Actual reading</span><span><i class="window"></i>Sensor window</span></div></div><div id="training-rows"></div></section>
+    <footer><span>y = B sin(Ax + F) <span class="divider">/</span> Shared x- and y-scales</span><span>Compare shared keys, frequency affinity, selective votes, and layered recruitment.</span></footer>
+  </main>
+  <template id="row-template"><article class="training-row"><div class="row-settings"><div class="row-title"><h3></h3><label class="run-control"><input type="checkbox" aria-label="Run stream"><span>Run</span></label></div><button class="step-stride" type="button">Step one window</button><div class="formula">y = B sin(Ax + F)</div><details class="parameter-panel"><summary>Parameters</summary><div class="parameters"><label>A <span>frequency</span><input data-param="a" type="number" min="0.01" max="20" step="0.1" value="1"></label><label>B <span>amplitude</span><input data-param="b" type="number" min="0.01" max="100" step="0.1" value="1"></label><label>F <span>phase · radians</span><input data-param="f" type="number" min="-1000" max="1000" step="0.1" value="0"></label><label>Y <span>sample jitter · % of B</span><input data-param="noise" title="Random y-offset as a percentage of amplitude B; out-of-range readings are missing" type="number" min="0" max="200" step="1" value="0"></label></div></details><div class="status">Ready · starts at x = 0</div></div><div class="chart-area"><canvas role="img" aria-label="Sine stream with sample points and sliding sensor window"></canvas><div class="window-symbols" role="img" aria-label="Quantized window symbols; asterisk means missed sample"></div><div class="chart-caption"></div></div><div class="metric"><span>Dictionary<br>size</span><strong>—</strong><small>Awaiting training</small></div><div class="metric probability"><span>Similarity<br>score</span><strong>—</strong><small>Step TEST to compare</small></div><details class="inspection"><summary>Inspect last window</summary><p class="inspection-summary">Step or run to inspect a complete window.</p><pre class="inspection-output"></pre></details></article></template>
+
+
+
+
+
+<script src="../assets/js/c3-sinusoids.js"></script>
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

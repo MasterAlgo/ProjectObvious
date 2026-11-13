@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OBVIOUS — Part 1: DEAD END</title>
+  <link rel="stylesheet" href="assets/css/index.css">
+<link rel="stylesheet" href="assets/css/common.css">
+  <meta name="description" content="Obvious: explore combinatorial input spaces and reusable pattern computation.">
+</head>
+<body>
+<a class="skip-link" href="#main-content">Skip to content</a>
+
+  <nav class="topbar">
+    <div class="topbar-inner">
+      <a href="index.html" class="brand"><span>OBVIOUS</span> // ARCHITECTURE LAB</a>
+      <div class="nav-links">
+        <a href="index.html" class="active" aria-current="page">1. Dead End</a>
+        <a href="clues.html">2. The Clues &amp; Lab</a>
+        <a href="implications.html">3. What Might This Explain?</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container" id="main-content">
+    <header>
+      <div class="eyebrow">Part 1 of 3 — The Combinatorial Paradox</div>
+      <h1>DEAD END</h1>
+      <p class="tagline">
+        <strong>One neuron. Thousands of inputs. Astronomically many possible combinations.</strong>
+      </p>
+    </header>
+
+    <section class="stage-grid">
+      <!-- Left: Twinkling Neuron Canvas -->
+      <div class="card">
+        <div class="canvas-wrap">
+          <canvas id="neuronCanvas" width="800" height="600"></canvas>
+          <div class="canvas-overlay">
+            <div class="legend">
+              <span><i class="dot dot-inactive"></i>Inactive (<span id="legInactive">9,800</span>)</span>
+              <span><i class="dot dot-active"></i>Active (<span id="legActive">200</span>)</span>
+              <span><i class="dot dot-soma"></i>Soma Threshold Pulse</span>
+            </div>
+          </div>
+        </div>
+        <div class="canvas-controls">
+          <div class="btn-group">
+            <button id="toggleAnimBtn">Pause Animation</button>
+            <button id="resetBtn">Reset (10,000 / 200)</button>
+          </div>
+          <span class="note-tiny">Illustrative visualization — not a biophysical simulation</span>
+        </div>
+      </div>
+
+      <!-- Right: Combinatorial Math & Slider -->
+      <div class="card">
+        <div class="math-hero">
+          <div class="formula-label">Distinct Input Combinations: C(N, K) = N! / (K! &times; (N&minus;K)!)</div>
+          <div class="formula-expr" id="formulaExpr">C(10,000, 200)</div>
+          <div class="big-result" id="sciResult">&approx; 1.710 &times; 10<sup>424</sup></div>
+          <span class="digit-badge" id="digitBadge">425 decimal digits</span>
+
+          <details>
+            <summary>Inspect exact integer (<span id="exactSummaryCount">425</span> digits)</summary>
+            <div class="full-int-box" id="fullIntegerBox"></div>
+          </details>
+        </div>
+
+        <!-- Logarithmic N Slider -->
+        <div class="control-block">
+          <div class="control-header">
+            <label for="nSlider" class="control-title">Total Synapses (N): 10,000 &rarr; 10</label>
+            <span class="control-val" id="nDisplay">10,000</span>
+          </div>
+          <input type="range" id="nSlider" min="0" max="1000" value="0" step="1" />
+          <div class="scale-ticks">
+            <span>10,000</span>
+            <span>1,000</span>
+            <span>100</span>
+            <span>10</span>
+          </div>
+        </div>
+
+        <!-- Active K Display & Override -->
+        <div class="control-block" style="margin-bottom:0;">
+          <div class="control-header">
+            <span class="control-title">Simultaneously Active Synapses (K)</span>
+            <span class="control-val" id="kDisplay">200</span>
+          </div>
+          <p class="note-tiny" style="margin-bottom: 0.65rem;">
+            <strong>Scaling convention:</strong> By default, K scales as an <em>illustrative</em> active fraction of <strong>2% of N</strong> (minimum 1). This is a demonstration rule to keep the slider meaningful across scales, not a claim about biological scaling.
+          </p>
+
+          <div class="k-override-row">
+            <label style="display:flex; align-items:center; gap:0.4rem; cursor:pointer;">
+              <input type="checkbox" id="manualKCheck" />
+              Override K manually (e.g., try N=10, K=5 &rarr; 252)
+            </label>
+            <input type="number" id="manualKInput" min="1" max="10000" value="200" disabled />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Central Message -->
+    <section class="message-grid">
+      <div class="card">
+        <h2>What the number C(N, K) means—and what it doesn't</h2>
+        <p>
+          A neuron integrates inputs arriving through many synapses. Different input ensembles may contribute to the generation of the same outgoing spike.
+        </p>
+        <p>
+          The mathematical number <strong>C(N, K)</strong> counts distinct sets of <strong>K</strong> active synapses chosen from <strong>N</strong> available synapses.
+        </p>
+        <p style="margin-bottom:0;">
+          It does <strong>not</strong> mean all these combinations naturally occur, are equally probable, or are sufficient to trigger an action potential. The real neuron is sensitive to synaptic weights, dendritic locations, inhibition, timing, membrane state, and other physiological conditions.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Why brute-force enumeration is a DEAD END</h2>
+        <div class="callout-deadend">
+          <strong>DEAD END</strong> refers to attempting to explicitly construct and store every theoretical combination using brute-force enumeration. It is not a claim that biological neurons perform such enumeration.
+        </div>
+        <p style="margin-bottom:0;">
+          Even if you slide <strong>N</strong> down from 10,000 to just 1,000 synapses with 20 active inputs, <strong>C(1,000, 20)</strong> still exceeds <strong>3.39 &times; 10<sup>41</sup></strong> combinations. Exhaustive lookup tables are impossible in both tissue and silicon.
+        </p>
+      </div>
+    </section>
+
+    <!-- Closing Question Banner -->
+    <div class="question-banner">
+      <p>How does biological computation operate within this enormous potential input space without enumerating it?</p>
+      <a href="clues.html" class="next-btn">Explore the Clues &amp; Lab &rarr;</a>
+    </div>
+
+    <!-- Expandable Experimental Neuroscience Section -->
+    <section class="bio-section">
+      <details>
+        <summary>Biological Evidence — Experimental Neuroscience Supporting the Demonstration (Click to expand)</summary>
+        <p style="margin-top:0.75rem; font-size:0.88rem; color:var(--muted);">
+          Our starting point of 10,000 synapses and 200 simultaneous activations is a deliberately simplified illustration, not a universal biological constant. Below are key experimental and modeling studies on synaptic counts, coincidence detection, and nonlinear dendritic subunits. Note the distinction between <strong>model-derived predictions</strong> and <strong>direct experimental measurements</strong>.
+        </p>
+
+        <div class="paper-list">
+          <div class="paper-item">
+            <h3>Eyal et al. (2018) — Human Cortical Pyramidal Neurons: From Spines to Spikes via Models</h3>
+            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6034553/" target="_blank" rel="noopener noreferrer">
+              https://pmc.ncbi.nlm.nih.gov/articles/PMC6034553/
+            </a>
+            <p>Anatomically and physiologically constrained computational models of human cortical pyramidal neurons.</p>
+            <ul>
+              <li><strong>Anatomical estimate:</strong> 20,000–30,000 dendritic spines on studied human layer 2/3 pyramidal cells.</li>
+              <li><strong>Model-derived prediction:</strong> Approximately 134 &plusmn; 28 simultaneous excitatory synaptic activations for a somatic action potential with 50% probability.</li>
+              <li><strong>Model-derived prediction:</strong> Approximately 20 &plusmn; 10 appropriately clustered activations could trigger local dendritic NMDA spikes in the model.</li>
+            </ul>
+          </div>
+
+          <div class="paper-item">
+            <h3>Azouz &amp; Gray (2000) — Dynamic spike threshold reveals a mechanism for synaptic coincidence detection in cortical neurons in vivo</h3>
+            <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC16678/" target="_blank" rel="noopener noreferrer">
+              https://pmc.ncbi.nlm.nih.gov/articles/PMC16678/
+            </a>
+            <p>
+              <strong>Experimental measurement:</strong> Demonstrates that cortical spike threshold depends on the rate of preceding membrane depolarization, supporting sensitivity to the temporal coincidence of incoming signals.
+            </p>
+          </div>
+
+          <div class="paper-item">
+            <h3>Polsky, Mel &amp; Schiller (2004) — Computational subunits in thin dendrites of pyramidal cells</h3>
+            <a href="https://doi.org/10.1038/nn1253" target="_blank" rel="noopener noreferrer">
+              https://doi.org/10.1038/nn1253
+            </a>
+            <p>
+              <strong>Experimental measurement:</strong> Shows that inputs clustered on the same thin dendritic branch can integrate nonlinearly, while spatially separated inputs behave differently.
+            </p>
+          </div>
+
+          <div class="paper-item">
+            <h3>Losonczy &amp; Magee (2006) — Integrative Properties of Radial Oblique Dendrites in Hippocampal CA1 Pyramidal Neurons</h3>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/16630839/" target="_blank" rel="noopener noreferrer">
+              https://pubmed.ncbi.nlm.nih.gov/16630839/
+            </a>
+            <p>
+              <strong>Experimental measurement:</strong> Patterned synaptic stimulation showed that appropriately timed inputs can produce local dendritic spikes, illustrating the importance of coincidence and spatial organization.
+            </p>
+          </div>
+
+          <div class="paper-item">
+            <h3>Spruston (2008) — Pyramidal neurons: dendritic structure and synaptic integration</h3>
+            <a href="https://doi.org/10.1038/nrn2286" target="_blank" rel="noopener noreferrer">
+              https://doi.org/10.1038/nrn2286
+            </a>
+            <p>
+              <strong>Review:</strong> Explains dendritic organization, synaptic integration, coincidence detection, and the specialized computational functions of dendritic branches.
+            </p>
+          </div>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  
+<script src="assets/js/index.js"></script>
+<script src="assets/js/shared.js"></script>
+</body>
+</html>

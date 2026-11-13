@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBVIOUS — Clue 1: Spatial ABRACADABRA</title>
+<link rel="stylesheet" href="../assets/css/labs.css">
+<link rel="stylesheet" href="../assets/css/c1-spatial.css">
+  <meta name="description" content="An Obvious computational lab. Interactive toy models and clearly labeled architectural demonstrations.">
+</head>
+<body>
+<nav class="lab-return" aria-label="Lab navigation"><a href="../index.html">OBVIOUS</a><a href="../clues.html#c1-spatial">&larr; Back to Clue 1</a><a href="../implications.html">Part 3 &rarr;</a></nav>
+
+<h1>ABRACADABRA</h1>
+<p class="subtitle">spatial subpattern detection · AND-node inference · false positive analysis</p>
+
+<div class="main">
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="ctrl-group">
+      <label>Target Sequence</label>
+      <input type="text" id="targetSeq" value="ABRACADABRA" maxlength="16">
+    </div>
+    <div class="ctrl-group">
+      <label>Latent Nodes <span class="val" id="nodeCountVal">3</span></label>
+      <input type="range" id="nodeCount" min="2" max="8" value="3">
+    </div>
+    <div class="ctrl-group">
+      <label>Fanin (legs) <span class="val" id="faninVal">5</span></label>
+      <input type="range" id="fanin" min="2" max="9" value="5">
+    </div>
+    <div class="ctrl-group">
+      <label>Overlap <span class="val" id="overlapVal">on</span></label>
+      <input type="range" id="overlapToggle" min="0" max="1" value="1" step="1">
+    </div>
+    <div class="ctrl-group">
+      <label>Speed <span class="val" id="speedVal">4</span></label>
+      <input type="range" id="speed" min="1" max="10" value="4">
+    </div>
+    <div class="ctrl-group">
+      <label>Series Length <span class="val" id="seriesVal">200</span></label>
+      <input type="range" id="seriesLen" min="20" max="1000" value="200" step="10">
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-end;">
+      <button class="btn" id="btnStart">▶ Run</button>
+      <button class="btn stop" id="btnStop">■ Stop</button>
+      <button class="btn regen" id="btnRegen">⟳ Rewire</button>
+    </div>
+  </div>
+
+  <!-- Subpatterns -->
+  <div class="net-wrap" style="padding:14px 20px;">
+    <div class="section-label">Latent Node Subpatterns</div>
+    <div class="subpat-list" id="subpatList"></div>
+  </div>
+
+  <!-- Network visualization -->
+  <div class="net-wrap">
+    <canvas id="netCanvas" height="260"></canvas>
+  </div>
+
+  <!-- Stats -->
+  <p id="coverageNote" class="lab-note" aria-live="polite"></p>
+<div class="stats">
+    <div class="stat-box">
+      <div class="label">Patterns Tested</div>
+      <div class="value" id="statTotal">0</div>
+    </div>
+    <div class="stat-box">
+      <div class="label">True Positives</div>
+      <div class="value" id="statTP">0</div>
+    </div>
+    <div class="stat-box fp">
+      <div class="label">False Positives</div>
+      <div class="value" id="statFP">0</div>
+    </div>
+    <div class="stat-box fn">
+      <div class="label">False Negatives</div>
+      <div class="value" id="statFN">0</div>
+    </div>
+    <div class="stat-box tn">
+      <div class="label">True Negatives</div>
+      <div class="value" id="statTN">0</div>
+    </div>
+    <div class="stat-box fp">
+      <div class="label">FP Rate</div>
+      <div class="value" id="statFPRate">0%</div>
+    </div>
+  </div>
+
+  <!-- Log -->
+  <div class="log-wrap" id="logWrap"></div>
+
+  <!-- LinkedIn Post Explanation -->
+  <div class="explainer">
+    <h2>...if you wire them properly</h2>
+    <p>Imagine an 11-node input layer where each node can hold one of 5 discrete signal grades. The target sequence <code>"ABRACADABRA"</code> has exactly 11 symbols and 5 unique letters. The full input space has 5<sup>11</sup> = 48,828,125 possible states.</p>
+    <p>Above the input layer sits a small latent layer of hard AND-nodes. Each latent node is configured from a specific subset of target positions and fires only if all of those positions match — like the substring <code>"ABRAC"</code> at positions 0–4, or <code>"CADA"</code> at positions 4–7. This is a hard-AND toy detector, not a biophysical neuron model.</p>
+    <p>At the top sits a single inference node — a hard AND over all latent nodes. It fires only when every latent node fires simultaneously.</p>
+
+    <h3>The Key Question</h3>
+    <p>How many false positives does this network produce when fed random patterns?<br>
+    A false positive means: a random input (not <code>"ABRACADABRA"</code>) causes the inference node to fire anyway — a spurious recognition.</p>
+
+    <h3>What the Demo Measures</h3>
+<p>These configured hard-AND nodes check exact target symbols. If their union covers U distinct positions of an input drawn uniformly from an alphabet of G symbols, the unconditional match probability is G<sup>−U</sup>. A position checked twice is still only one constraint. Compare actual coverage, not simply the number of nodes or wires.</p>
+<p>Overlap mode samples consecutive windows. Disjoint mode partitions positions and caps each node at the requested fan-in; its effective fan-in may be smaller. Wiring modes therefore need not have equal coverage or equal wire counts.</p>
+<h3>Limits of This Experiment</h3>
+<p>Random negatives and periodic target presentations are sampled, not exhaustive. Zero observed false positives gives no guarantee of zero population error. The target is wired into the detector, not learned, and full target identification requires checking every position. These results do not establish why biological receptive fields overlap.</p>
+</div>
+
+
+<script src="../assets/js/c1-spatial.js"></script>
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>

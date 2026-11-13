@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OBVIOUS — Clue 2: Temporal ABRACADABRA</title>
+<link rel="stylesheet" href="../assets/css/labs.css">
+<link rel="stylesheet" href="../assets/css/c2-temporal.css">
+  <meta name="description" content="An Obvious computational lab. Interactive toy models and clearly labeled architectural demonstrations.">
+</head>
+<body>
+<nav class="lab-return" aria-label="Lab navigation"><a href="../index.html">OBVIOUS</a><a href="../clues.html#c2-temporal">&larr; Back to Clue 2</a><a href="../implications.html">Part 3 &rarr;</a></nav>
+
+<h1>ABRACADABRA — EARLY SEQUENCE PREDICTION</h1>
+<p class="subtitle">sustained latent firing · partial evidence threshold · early prediction on sparse manifolds</p>
+
+<div class="main">
+
+  <!-- Controls -->
+  <p class="lab-note">Changing target, wiring, sensor width, K, sustain, or series length stops the run and resets its statistics. Speed applies immediately. Detector fragments are position-aligned; repeated or overlapping fragments are not independent evidence.</p>
+<div class="controls">
+    <div class="ctrl-group">
+      <label>Target Sequence</label>
+      <input type="text" id="targetSeq" value="ABRACADABRA" maxlength="16">
+    </div>
+    <div class="ctrl-group">
+      <label>Sensor Width <span class="val" id="sensorWidthVal">5</span></label>
+      <input type="range" id="sensorWidth" min="3" max="11" value="5">
+    </div>
+    <div class="ctrl-group">
+      <label>Fanin <span class="val" id="faninVal">5</span></label>
+      <input type="range" id="fanin" min="2" max="9" value="5">
+    </div>
+    <div class="ctrl-group">
+      <label>Latent Nodes <span class="val" id="nodeCountVal">3</span></label>
+      <input type="range" id="nodeCount" min="2" max="7" value="3">
+    </div>
+    <div class="ctrl-group">
+      <label>Min Nodes to Infer (K) <span class="val" id="kInferVal">3</span></label>
+      <input type="range" id="kInfer" min="1" max="7" value="3">
+    </div>
+    <div class="ctrl-group">
+      <label>Sustain (strides) <span class="val" id="sustainVal">7</span></label>
+      <input type="range" id="sustain" min="1" max="20" value="7">
+    </div>
+    <div class="ctrl-group">
+      <label>Speed <span class="val" id="speedVal">4</span></label>
+      <input type="range" id="speed" min="1" max="10" value="4">
+    </div>
+    <div class="ctrl-group">
+      <label>Series <span class="val" id="seriesVal">60</span></label>
+      <input type="range" id="seriesLen" min="10" max="300" value="60" step="5">
+    </div>
+    <div style="display:flex;gap:8px;align-items:flex-end;">
+      <button class="btn" id="btnStart">▶ Run</button>
+      <button class="btn stop" id="btnStop">■ Stop</button>
+      <button class="btn regen" id="btnRegen">⟳ Rewire</button>
+    </div>
+  </div>
+
+  <!-- Sequence + sensor display -->
+  <div class="seq-wrap">
+    <div class="section-label">Input Stream — Sliding Sensor Window</div>
+    <div id="seqRow"></div>
+    <div id="sensorBracket"></div>
+  </div>
+
+  <!-- Network -->
+  <div class="net-wrap">
+    <canvas id="netCanvas" height="260"></canvas>
+    <div class="predict-banner" id="predictBanner">—</div>
+  </div>
+
+  <!-- Sustain bars -->
+  <div class="sustain-wrap">
+    <div class="section-label">Latent Node Sustain</div>
+    <div id="sustainBars"></div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-box">
+      <div class="label">Sequences</div>
+      <div class="value" id="statTotal">0</div>
+    </div>
+    <div class="stat-box early">
+      <div class="label">Early Fires</div>
+      <div class="value" id="statEarly">0</div>
+    </div>
+    <div class="stat-box">
+      <div class="label">Full TP</div>
+      <div class="value" id="statTP">0</div>
+    </div>
+    <div class="stat-box fp">
+      <div class="label">False Pos</div>
+      <div class="value" id="statFP">0</div>
+    </div>
+    <div class="stat-box fn">
+      <div class="label">False Neg</div>
+      <div class="value" id="statFN">0</div>
+    </div>
+    <div class="stat-box early">
+      <div class="label">Avg Fire Stride</div>
+      <div class="value" id="statAvgStride">—</div>
+    </div>
+  </div>
+
+  <!-- Log -->
+  <div class="log-wrap" id="logWrap"></div>
+
+  <!-- Integrated Early Sequence Prediction Explanation -->
+  <div class="explainer">
+    <h2>OBVIOUS — Clue 2: Temporal ABRACADABRA Demo</h2>
+    <p>This demo extends the <a href="c1-spatial.html">spatial pattern detector</a> into the temporal domain — and adds one key idea: <strong>prediction from partial evidence</strong>.</p>
+    <p>The target sequence <code>"ABRACADABRA"</code> (11 symbols, 5 unique letters, 5<sup>11</sup> &approx; 48.8M possible input states) is presented one symbol at a time, stride by stride. A sliding sensor window of adjustable width moves across the stream. A set of latent AND-nodes — each tuned to a specific consecutive subpattern of the target — fire when the sensor sweeps past their pattern. They then sustain their activation for an independently adjustable number of strides, staying "alive" while the window moves on.</p>
+    <p>At the top sits an inference node. But unlike the spatial demo's hard AND, this one fires when <strong>K out of N</strong> latent nodes are simultaneously active. K is a parameter.</p>
+    <p style="color:var(--accent3);">That single change — from "all must fire" to "K must fire" — is the difference between recognition and <strong>prediction</strong>.</p>
+
+    <h3>What K Controls</h3>
+    <div class="mode-block">
+      <p style="margin-bottom:0;"><strong>K = N (all nodes required):</strong><br>
+      The inference node waits for every subpattern to confirm. This is sustained full recognition — reliable, but conservative. With the default full-coverage wiring, the last detector confirms at the final target symbol. Other wiring settings may leave positions unchecked.</p>
+    </div>
+
+    <div class="mode-block predictive">
+      <p style="margin-bottom:0;"><strong>K &lt; N (partial evidence threshold):</strong><br>
+      The inference node can fire once K detector traces are active, before the remaining fragments arrive. Partial evidence can also trigger on a non-target sequence. Its diagnostic value depends on coverage, sustain, and input statistics.<br><br>
+      This is an early target-recognition event. The lab does not generate the unseen suffix or implement an error-correcting predictive-coding circuit.</p>
+    </div>
+
+    <h3>The False Positive Experiment</h3>
+    <p>Try this sequence:</p>
+    <ol>
+      <li><strong>Fanin=2, K=1</strong> &rarr; a short fragment supplies relatively weak evidence. Measure the false-positive count over enough negative trials instead of assuming errors will appear in every short run.</li>
+      <li><strong>Fanin=5, N=3, K=2, sustain=7</strong> &rarr; with the default target, the first target event occurs at zero-based stride 7.</li>
+      <li><strong>Fanin=5, N=3, K=3, sustain=7</strong> &rarr; all three detector traces are required. The default target first fires at stride 10, its final symbol. Here K=3 is exactly K=N.</li>
+    </ol>
+    <p>This controlled experiment illustrates the tradeoff between earlier commitment and complete evidence. Non-target sequences are sampled uniformly here; natural input statistics and real-task prediction accuracy are not measured. Repeated or overlapping detector fragments are not independent evidence.</p>
+
+    <h3>Sustain as Working Memory</h3>
+    <p>When a latent node fires and sustains, it's holding a trace — <em>"I saw ABRAC a few strides ago."</em> That trace needs to stay alive long enough to overlap with later subpattern matches.</p>
+    <p><strong>Too short sustain</strong> &rarr; early matches fade before late ones confirm &rarr; false negatives.<br>
+    <strong>Longer sustain</strong> &rarr; more separated matches within one sequence can coexist, potentially admitting additional non-target sequences. Traces are reset between sequences.</p>
+    <p>The sweet spot is determined by the <strong>temporal spread</strong> of the subpatterns across the sequence. This is a computational analogy to temporary retention, not a biological working-memory model.</p>
+    <p style="color:var(--accent);margin-bottom:0;">The model uses position-aligned target fragments and resets traces between sequences. It does not model recurrent biological circuits, clinical conditions, or subjective experience.</p>
+  </div>
+
+</div>
+
+
+<script src="../assets/js/c2-temporal.js"></script>
+<script src="../assets/js/shared.js"></script>
+</body>
+</html>
